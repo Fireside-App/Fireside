@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import Camp from './Camp.jsx';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import React, { Component } from "react";
+import Camp from "./Camp.jsx";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import {
   Container,
   Button,
@@ -10,7 +10,7 @@ import {
   Input,
   FormText,
   Table
-} from 'reactstrap';
+} from "reactstrap";
 
 /* the returnHome button here is currently hard coded to link back to our landing page at a presentation link
 this button's functionality needs to be better fleshed out or maybe the routing needs to be fixed. 
@@ -28,14 +28,12 @@ INSERT INTO the favorites table on the database with both the userID and the lis
 const Results = props => {
   const { queriedGrounds, getWeather } = props;
   
-
   let homeButton;
   let tableResults;
 
   const results = queriedGrounds.map(curr => {
     return <Camp camp={curr} getWeather={getWeather}/>;
   });
-  console.log(results);
 
   // if(results.length > 0){
   //   tableResults = <Table className="Table" hover>
@@ -57,20 +55,20 @@ const Results = props => {
   //   homeButton = <Button className="findMore" color="secondary" >Find More </Button>;
   // }
   return (
-    <div className='Results'>
+    <div className="Results">
       <h1>Your Next Adventure Awaits</h1>
-      <Link to='/landing/ayypresent'>
-        <Button className='returnHome' outline color='info'>
-          Return Home{' '}
+      <Link to="/landing/ayypresent">
+        <Button className="returnHome" outline color="info">
+          Return Home{" "}
         </Button>
       </Link>
       <div
         style={{
-          maxHeight: '800px',
-          overflowY: 'auto'
+          maxHeight: "800px",
+          overflowY: "auto"
         }}
       >
-        <Table className='Table' scrollY maxHeight='400px'>
+        <Table className="Table" scrollY maxHeight="400px">
           <thead>
             <tr>
               <th>Camp</th>

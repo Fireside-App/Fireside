@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 // import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 // import { faStar as regStar } from '@fortawesome/free-regular-svg-icons';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import {
   Container,
   Button,
@@ -12,7 +12,7 @@ import {
   Input,
   FormText,
   Table
-} from 'reactstrap';
+} from "reactstrap";
 
 /*
 As mentioned in Results.jsx, the major work in Camp.jsx that needs to be done includes creating a function
@@ -20,16 +20,30 @@ in App.jsx that can add each of our favorites to an array in state.
 */
 
 const Camp = props => {
-    const { camp } = props;
-    const { facilityName , latitude, longitude, sitesWithPetsAllowed, sitesWithSewerHookup, sitesWithWaterHookup, sitesWithWaterFront, state} = camp;
+  const { camp } = props;
+  const {
+    facilityName,
+    latitude,
+    longitude,
+    sitesWithPetsAllowed,
+    sitesWithSewerHookup,
+    sitesWithWaterHookup,
+    sitesWithWaterFront,
+    state
+  } = camp;
 
-    let fav = <button type="radio" name={`fav${facilityName}`} />
+  let fav = <button type="radio" name={`fav${facilityName}`} />;
+  console.log("camp here::::", camp);
+  // if(star.isFav){
+  //     star = solidStar
+  // } else {
+  //     star = regStar
+  // }
 
-    // if(star.isFav){
-    //     star = solidStar
-    // } else {
-    //     star = regStar
-    // }
+  // let FavIcon;
+  // if (isFav) FavIcon = (<span className="favIcon"><FAIcon onClick={() => favClicked(id)} icon={solidStar} style={{ color: 'steelblue' }} /></span>);
+  // else FavIcon = (<span className="favIcon"><FAIcon onClick={() => favClicked(id)} icon={regStar} /></span>);
+
 
     // let FavIcon;
     // if (isFav) FavIcon = (<span className="favIcon"><FAIcon onClick={() => favClicked(id)} icon={solidStar} style={{ color: 'steelblue' }} /></span>);
@@ -51,6 +65,7 @@ const Camp = props => {
             </tr>
         // </ReactFragment>
     )
+
 };
 
 export default Camp;
