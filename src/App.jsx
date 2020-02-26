@@ -214,7 +214,7 @@ class App extends Component {
   getWeather(lat, long)  {
     // console.log('eeeeeeekfj;kaj', e.target)
 
-    fetch(`https://api.darksky.net/forecast/'INSERT KEY HERE'/${lat},${long}?exclude=currently,minutely,hourly,alerts,flags`)
+    fetch(`https://api.darksky.net/forecast/6de6c91d1869c981b49f8ffa13fcd509/${lat},${long}?exclude=currently,minutely,hourly,alerts,flags`)
     .then(res => res.json())
     .then(data => {
       console.log('data>>>>', data)

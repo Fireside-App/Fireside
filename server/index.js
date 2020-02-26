@@ -1,5 +1,5 @@
 const { Pool } = require('pg');
-const PG_URI = require('./PG_URI');
+const PG_URI = require('./PG_URI.js');
 
 // console.log(PG_URI);
 

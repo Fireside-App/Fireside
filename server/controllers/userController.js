@@ -68,7 +68,9 @@ userController.createUser = (req, res, next) => {
     });
 };
 
-userController.addCampground = (req, res, next) => {};
+userController.addCampground = (req, res, next) => {
+  // this is where we want to add the campground;
+};
 
 /*
 this addFav functionality has yet to be implemented. unsure of whether or not this middleware 
@@ -76,39 +78,40 @@ will work with the way iteration teams will end up sending fav data back to the 
 back userId when calling addFavs.
 */
 userController.addFav = (req, res, next) => {
-  const user = req.body.username;
-  const campground = req.body.campground;
+  // const user = req.body.user;
+  // const campground = req.body.campground;
+  console.log(req.body, "THIS IS REQ BODY COMING FROM POST");
 
-  const text = `INSERT INTO favorites (Campground_id, user_id) VALUES ($1,$2)`;
-  const values = [campground, user];
+  // this is where we want to add favorites, make sure to extra from body
+  const text = `INSERT INTO favorites (camp_id, user_id) VALUES ($1, $2)`;
+  const values = [req.body.user_id, req.body.camp_id];
 
   db.query(text, values)
     .then(response => {
+      // grabbing the response and then adding it to res locals favorites
+      res.locals.favorites = response;
       return next();
     })
     .catch(err => {
-      console.log('Error: ', err);
+      console.log('Error: from adding favorites', err);
       return next(err);
     });
 };
 
 userController.getFav = (req, res, next) => {
-  const user = req.body.username;
 
   const text = `SELECT * FROM campground WHERE campground_id in
   (
-  select campground_id from favorites where user_id = $1
+  select campground_id from favorites where user_id = ${req.body.user_id}
   )`;
-
-  const value = [user];
-
+// we're requesting data from the req body
   db.query(text, value)
     .then(response => {
       res.locals.user = response.rows;
       return next();
     })
     .catch(err => {
-      console.log('Error: ', err);
+      console.log('Error: from GETTING FAVORITES', err);
       return next(err);
     });
 };
