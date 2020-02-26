@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const cors = require('cors')
 
 
 require('dotenv').config();
@@ -10,6 +11,7 @@ require('dotenv').config();
 
 const app = express();
 const PORT = 3000;
+app.use(cors())
 
 /** 
 * required router(s)

@@ -8,6 +8,7 @@
   height: 100vh; */
   /* margin: 0; */
 }
+
 .container {
   /* margin: 0;
   padding: 0; */
@@ -99,6 +100,7 @@
   min-width: 100%;
   min-height: 100%;
 }
+
 .Landing {
   background: url('../assets/TentCanyonLg.jpg') no-repeat center center fixed;
   position: fixed;
@@ -196,6 +198,7 @@ h3 {
   border: 2px solid whitesmoke;
   font-size: 1.1em;
 }
+
 .QueryButton:hover {
   background-color: whitesmoke;
   color: rgb(0, 70, 46);
@@ -265,6 +268,7 @@ thead {
   font-size: 1.2em;
   opacity: 0.8;
 }
+
 td button {
   width: 20px;
 }
@@ -272,6 +276,13 @@ td button {
 td .form-check-input {
   margin-left: 3%;
   background-color: rgba(255, 255, 255, 0.199);
+}
+
+.button {
+  font-size: 1.3em;
+  opacity: 0.8;
+  color: whitesmoke;
+  background-color: rgb(25, 90, 143);
 }
 
 /* .queryContainer {
