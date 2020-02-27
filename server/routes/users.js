@@ -1,16 +1,17 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const userController = require('../controllers/userController');
+const userController = require("../controllers/userController");
 
 router.post(
-  '/login',
+  "/login",
   userController.login,
-  /*userController.getFav,*/ (req, res) => {
-    res.status(200).json(res.locals.user);
+  userController.setSSIDCookie,
+  (req, res) => {
+    res.status(200).json(res.locals);
   }
 );
 
-router.post('/signup', userController.createUser, (req, res) => {
+router.post("/signup", userController.createUser, (req, res) => {
   res.status(200).json(res.locals);
 });
 
@@ -19,7 +20,7 @@ router.post('/signup', userController.createUser, (req, res) => {
 /* when user clicks on the 'Favorite' button on the search results page
 adds the user_id and a camp_id to favorites, then adds all of the camp data to camps (unique table)*/
 router.post(
-  '/favorites',
+  "/favorites",
   userController.addCampFav,
   userController.addFav,
   (req, res, next) => {

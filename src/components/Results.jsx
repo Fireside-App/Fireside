@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import Camp from './Camp.jsx';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import React, { Component } from "react";
+import Camp from "./Camp.jsx";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import {
   Container,
   Button,
@@ -10,7 +10,7 @@ import {
   Input,
   FormText,
   Table
-} from 'reactstrap';
+} from "reactstrap";
 
 /* the returnHome button here is currently hard coded to link back to our landing page at a presentation link
 this button's functionality needs to be better fleshed out or maybe the routing needs to be fixed. 
@@ -27,45 +27,29 @@ INSERT INTO the favorites table on the database with both the userID and the lis
 
 const Results = props => {
   const { queriedGrounds, getWeather } = props;
-
   let homeButton;
   let tableResults;
 
   const results = queriedGrounds.map(curr => {
     return <Camp userId={props.userId} camp={curr} getWeather={getWeather} />;
   });
-
-  // if(results.length > 0){
-  //   tableResults = <Table className="Table" hover>
-  //                     <thead>
-  //                       <tr>
-  //                         <th>Camp</th>
-  //                         <th>Pets</th>
-  //                         <th>Sewer-hookup</th>
-  //                         <th>Water-hookup</th>
-  //                         <th>waterfront</th>
-  //                         <th>Longitude</th>
-  //                         <th>Latitude</th>
-  //                       </tr>
-  //                     </thead>
-  //                     {/* <tbody>
-  //                      {results}
-  //                     </tbody> */}
-  //                   </ Table>;
-  //   homeButton = <Button className="findMore" color="secondary" >Find More </Button>;
-  // }
   return (
-    <div className='Results'>
+    <div className="Results">
       <h1>Your Next Adventure Awaits</h1>
-      <Link to='/landing/ayypresent'>
-        <Button className='returnHome' outline color='info'>
-          Return Home{' '}
+      <Link to="/">
+        <Button
+          className="returnHome"
+          onClick={props.resetQueried}
+          outline
+          color="info"
+        >
+          Return Home{" "}
         </Button>
       </Link>
       <div
         style={{
-          maxHeight: '800px',
-          overflowY: 'auto'
+          maxHeight: "800px",
+          overflowY: "auto"
         }}
       >
         <Table

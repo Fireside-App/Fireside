@@ -29,7 +29,7 @@ const Camp = props => {
     sitesWithPetsAllowed,
     sitesWithSewerHookup,
     sitesWithWaterHookup,
-    sitesWithWaterFront,
+    sitesWithWaterfront,
     state
   } = camp;
 
@@ -83,7 +83,7 @@ const Camp = props => {
         <strong>{sitesWithWaterHookup}</strong>
       </td>
       <td>
-        <strong>{sitesWithWaterFront}</strong>
+        <strong>{sitesWithWaterfront}</strong>
       </td>
       <td id='longitude'>
         <strong>{longitude}</strong>

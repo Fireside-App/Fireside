@@ -8,7 +8,6 @@ require("dotenv").config();
 const campController = {};
 
 campController.query = (req, res, next) => {
-  console.log("entered campcontrollerquery");
   const { pet, waterFront, waterHook, sewerHook, state } = req.body;
 
   //this logic builds our api query string based upon the parameters passed back
@@ -31,15 +30,10 @@ campController.query = (req, res, next) => {
     apiString += "&waterfront=3011";
   }
   apiString += "&api_key=";
-  // console.log(apiString);
 
   const campOptions = {
     url: (apiString += process.env.CAMPGROUND_KEY),
     method: "GET",
-    // =======
-    //     url: apiString  += '7zfwzuqf57fwnbv3sdkgc66j',
-    //     method: 'GET',
-
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json;charset=UTF-8"
@@ -56,13 +50,7 @@ campController.query = (req, res, next) => {
         superParse = result.resultset.result;
       });
 
-      // fs.writeFileSync(
-      //   path.resolve(__dirname, "../database/camp.json"),
-      //   JSON.stringify(superParse)
-      // );
-
       let arrData = superParse.map(curr => curr["$"]);
-      // res.locals.campgrounds = arrData;
 
       if (pet) {
         arrData = arrData.filter(curr => curr.sitesWithPetsAllowed === "Y");
@@ -76,7 +64,6 @@ campController.query = (req, res, next) => {
       if (waterFront) {
         arrData = arrData.filter(curr => curr.sitesWithWaterfront !== "");
       }
-      console.log("arrData: ", arrData);
 
       res.locals.campgrounds = arrData;
       return next();
@@ -84,7 +71,6 @@ campController.query = (req, res, next) => {
     .catch(err => {
       return next(err);
     });
-  // .catch(err => console.log("camp controller : axios fetch error: ", err));
 };
 
 module.exports = campController;

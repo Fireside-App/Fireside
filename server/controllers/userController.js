@@ -5,13 +5,18 @@ const db = require('../index.js');
 userController.login = (req, res, next) => {
   const user = [req.body.username];
   const password = req.body.password;
+  console.log("no username", user);
+  if (user[0].length == 0) {
+    console.log("no username", user);
 
+    res.redirect("/login");
+  }
   const text = `SELECT * FROM users WHERE username = $1`;
 
   db.query(text, user, (err, data) => {
     if (err) {
       res.locals.badPassword = true;
-      return next();
+      return next(err);
     }
 
     if (data.rows[0].password !== password) {
@@ -22,6 +27,9 @@ userController.login = (req, res, next) => {
       return next();
     }
   });
+};
+userController.setSSIDCookie = (req, res, next) => {
+  return next();
 };
 
 userController.deleteUser = (req, res, next) => {
@@ -82,6 +90,7 @@ userController.addFav = (req, res, next) => {
 };
 
 userController.addCampFav = (req, res, next) => {
+  // this is where we want to add favorites, make sure to extra from body
   const text = `INSERT INTO camps (name, pets, sewer, water, waterfront, long, lat) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`;
   const values = [
     req.body.name,
@@ -102,7 +111,7 @@ userController.addCampFav = (req, res, next) => {
       return next();
     })
     .catch(err => {
-      console.log('Error: from adding campfavs', err);
+      console.log("Error: from adding campfavs", err);
       return next(err);
     });
 };
@@ -110,7 +119,6 @@ userController.addCampFav = (req, res, next) => {
 // Users table & Favs table will stay the same
 
 userController.getFav = (req, res, next) => {
-  console.log(req.params, 'THIS IS REQ PARAMS');
   const value = [req.params.id];
 
   const text = `SELECT c.* FROM camps c INNER JOIN favorites f ON c.id = f.camp_id WHERE f.user_id = $1`;
