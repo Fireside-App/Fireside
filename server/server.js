@@ -46,7 +46,7 @@ app.get("/*", (req, res) => {
 });
 
 // //this is the error handler
-function logErrors(err, req, res, next) {
+app.use((err, req, res, next) => {
   const defaultErr = {
     log: "Express error handler caught unknown middleware error",
     status: 400,
@@ -54,7 +54,7 @@ function logErrors(err, req, res, next) {
   };
   const errorObj = Object.assign({}, defaultErr);
   res.status(errorObj.status).json(errorObj.message);
-}
+});
 
 app.listen(PORT, () => console.log(`listening on Port: ${PORT}`));
 

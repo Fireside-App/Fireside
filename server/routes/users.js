@@ -1,17 +1,17 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const userController = require('../controllers/userController');
+const userController = require("../controllers/userController");
 
 router.post(
-  '/login',
+  "/login",
   userController.login,
-  /*userController.getFav,*/ (req, res) => {
-    console.log('outside of login middleware');
+  userController.setSSIDCookie,
+  (req, res) => {
     res.status(200).json(res.locals);
   }
 );
 
-router.post('/signup', userController.createUser, (req, res) => {
+router.post("/signup", userController.createUser, (req, res) => {
   res.status(200).json(res.locals);
 });
 
@@ -25,11 +25,11 @@ router.post('/signup', userController.createUser, (req, res) => {
 //     res.status(200).json()
 // });
 router.post(
-  '/favorites',
+  "/favorites",
   userController.addCampFav,
   userController.addFav,
   (req, res, next) => {
-    console.log('RESPONSE OKAY');
+    console.log("RESPONSE OKAY");
     const newBody = [res.locals.campFavorites, res.locals.favorites];
 
     // res.status(200).json(newBody);
@@ -37,11 +37,11 @@ router.post(
   }
 );
 
-router.get('/favorites/:id', userController.getFav, (req, res, next) => {
+router.get("/favorites/:id", userController.getFav, (req, res, next) => {
   res.status(200).json(res.locals);
 });
 
-router.delete('/deleteuser', userController.deleteUser, (req, res) => {
+router.delete("/deleteuser", userController.deleteUser, (req, res) => {
   res.status(200).json();
 });
 

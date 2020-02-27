@@ -12,7 +12,6 @@ const Login = props => {
             username
           </Label>
           <Input
-
             type="text"
             name="email"
             id="email"
@@ -32,18 +31,17 @@ const Login = props => {
             bsSize="large"
           />
         </FormGroup>
-        <div className='login-btns'>
-          <Button bssize='lg' outline color='primary'>
+        <div className="login-btns">
+          <Button bssize="lg" outline color="primary">
             Explore
           </Button>
-          <Button bssize='lg' outline color='primary'>
-            <Link to='/signup'>Sign Up</Link>
+          <Button bssize="lg" outline color="primary">
+            <Link to="/signup">Sign Up</Link>
           </Button>
         </div>
         {/* <Button bssize='lg' outline color='primary'>
           Sign Up
         </Button> */}
-
       </Form>
     </div>
   );

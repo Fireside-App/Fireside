@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Query from "./components/Query.jsx";
 import Landing from "./components/Landing.jsx";
 import Login from "./components/Login.jsx";
 import Results from "./components/Results.jsx";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Signup from "./components/Signup.jsx";
-import { Button } from "reactstrap";
-import Modal from "react-modal";
 
 import "./components/stylesheet.css";
 
@@ -38,14 +35,14 @@ class App extends Component {
 
     this.state = {
       pet: false,
-      state: "",
+      state: "AL",
       sewerHook: false,
       waterHook: false,
       waterFront: false,
-
+      invalidUsername: false,
       queriedGrounds: [],
       queried: false,
-      hasFavs: false,
+      hasFavs: true,
       loggedIn: false,
       signedUp: false,
       userId: -1
@@ -59,6 +56,7 @@ class App extends Component {
     this.waterFrontOnChange = this.waterFrontOnChange.bind(this);
     this.stateOnChange = this.stateOnChange.bind(this);
     this.query = this.query.bind(this);
+    this.resetQueried = this.resetQueried.bind(this);
   }
 
   componentDidMount() {
@@ -71,7 +69,8 @@ class App extends Component {
 
   signup(e) {
     e.preventDefault();
-    const user = e.target.email.value;
+    const name = e.target.name.value;
+    const user = e.target.username.value;
     const pass = e.target.password.value;
     console.log("entered signup");
     fetch("/user/signup", {
@@ -80,6 +79,7 @@ class App extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        name: name,
         username: user,
         password: pass
       })
@@ -98,6 +98,11 @@ class App extends Component {
 
   login(e) {
     e.preventDefault();
+    if (e.target.email.value.length == 0) {
+      console.log("hereeeeee");
+      this.setState({ invalidUsername: true });
+      return;
+    }
     const user = e.target.email.value;
     const pass = e.target.password.value;
     console.log("login user: ", user);
@@ -119,8 +124,6 @@ class App extends Component {
           newState.loggedIn = true;
           console.log("in here");
           this.setState(newState);
-          console.log(this.state.loggedIn);
-          console.log("reset state");
         }
       });
   }
@@ -212,6 +215,19 @@ class App extends Component {
     }
   }
 
+  //reset the "queried" boolean in the state so that
+  //when you return home you can make a new search
+  resetQueried() {
+    this.setState({
+      pet: false,
+      state: "AL",
+      sewerHook: false,
+      waterHook: false,
+      waterFront: false,
+      queried: false
+    });
+  }
+
   render() {
     //variable declared for dynamic rendering of our pages based upon the results of async fetch requests
     let loggedin = this.state.loggedIn;
@@ -228,7 +244,10 @@ class App extends Component {
             {loggedin ? (
               <Landing hasFavs={this.state.hasFavs} />
             ) : (
-              <Login login={this.login} />
+              <Login
+                invalidUsername={this.state.invalidUsername}
+                login={this.login}
+              />
             )}
           </Route>
           <Route exact path="/camp">
@@ -252,6 +271,7 @@ class App extends Component {
               <Results
                 queriedGrounds={this.state.queriedGrounds}
                 getWeather={this.getWeather}
+                resetQueried={this.resetQueried}
               />
             )}
           />
@@ -262,12 +282,8 @@ class App extends Component {
               <Signup signup={this.signup} />
             )}
           </Route>
-          <Route exact path="/landing">
-            {queryResponse ? (
-              <Redirect to="/results" />
-            ) : (
-              <Login login={this.login} />
-            )}
+          <Route path="/landing">
+            {queryResponse ? <Redirect to="/" /> : <Login login={this.login} />}
             render = {() => <Landing hasFavs={this.state.hasFavs} />}
           </Route>
           <Route exact path="/landing/ayypresent">

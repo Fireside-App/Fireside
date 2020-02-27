@@ -5,16 +5,19 @@ const db = require("../index.js");
 userController.login = (req, res, next) => {
   const user = [req.body.username];
   const password = req.body.password;
+  console.log("no username", user);
+  if (user[0].length == 0) {
+    console.log("no username", user);
 
+    res.redirect("/login");
+  }
   const text = `SELECT * FROM users WHERE username = $1`;
 
   db.query(text, user, (err, data) => {
     if (err) {
       res.locals.badPassword = true;
-      return next();
+      return next(err);
     }
-
-    console.log("data from postgres: ", data.rows[0].password);
 
     if (data.rows[0].password !== password) {
       console.log("password did not match");
@@ -22,10 +25,12 @@ userController.login = (req, res, next) => {
       return next();
     } else {
       res.locals.user = data.rows[0];
-      console.log(res.locals, "this is locals inside login middleware");
       return next();
     }
   });
+};
+userController.setSSIDCookie = (req, res, next) => {
+  return next();
 };
 
 userController.deleteUser = (req, res, next) => {
