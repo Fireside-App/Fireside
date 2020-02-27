@@ -120,10 +120,12 @@ class App extends Component {
       .then(res => res.json())
       .then(data => {
         if (data) {
-          const newState = Object.assign({}, this.state);
-          newState.loggedIn = true;
-          console.log("in here");
-          this.setState(newState);
+          this.setState(state => {
+            const copy = Object.assign({}, state);
+            copy.loggedIn = true;
+            copy.userId = data.id;
+            return copy;
+          });
         }
       });
   }
@@ -242,7 +244,10 @@ class App extends Component {
         <Switch>
           <Route exact path="/">
             {loggedin ? (
-              <Landing hasFavs={this.state.hasFavs} />
+              <Landing
+                userId={this.state.userId}
+                hasFavs={this.state.hasFavs}
+              />
             ) : (
               <Login
                 invalidUsername={this.state.invalidUsername}
@@ -261,6 +266,7 @@ class App extends Component {
                 sewerHookOnChange={this.sewerHookOnChange}
                 waterFrontOnChange={this.waterFrontOnChange}
                 query={this.query}
+                userId={this.state.userId}
               />
             )}
           </Route>
@@ -272,12 +278,16 @@ class App extends Component {
                 queriedGrounds={this.state.queriedGrounds}
                 getWeather={this.getWeather}
                 resetQueried={this.resetQueried}
+                userId={this.state.userId}
               />
             )}
           />
           <Route exact path="/signup">
             {signedUp ? (
-              <Landing hasFavs={this.state.hasFavs} />
+              <Landing
+                hasFavs={this.state.hasFavs}
+                userId={this.state.userId}
+              />
             ) : (
               <Signup signup={this.signup} />
             )}
@@ -287,7 +297,8 @@ class App extends Component {
             render = {() => <Landing hasFavs={this.state.hasFavs} />}
           </Route>
           <Route exact path="/landing/ayypresent">
-            <Landing hasFavs={this.state.hasFavs} />
+            <Landing hasFavs={this.state.hasFavs} userId={this.state.userId}/>
+
           </Route>
         </Switch>
       </div>

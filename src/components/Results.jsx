@@ -31,7 +31,7 @@ const Results = props => {
   let tableResults;
 
   const results = queriedGrounds.map(curr => {
-    return <Camp camp={curr} getWeather={getWeather} />;
+    return <Camp userId={props.userId} camp={curr} getWeather={getWeather} />;
   });
   return (
     <div className="Results">
@@ -52,7 +52,12 @@ const Results = props => {
           overflowY: "auto"
         }}
       >
-        <Table className="Table" scrollY maxHeight="400px">
+        <Table
+          userId={props.userId}
+          className='Table'
+          scrollY
+          maxHeight='400px'
+        >
           <thead>
             <tr>
               <th>Camp</th>

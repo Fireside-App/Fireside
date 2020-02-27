@@ -12,7 +12,7 @@ const landing = props => {
   const { hasFavs } = props;
   const [favs, setFavs] = useState([]);
   const [gotData, setGotData] = useState(false); // prevent re-running of useEffect
-  let userId; //capture userId here from state for fetch below
+  //capture userId here from state for fetch below
 
   useEffect(() => {
     // upon load, the landing page will query back end for a specific users fav camps
@@ -20,7 +20,7 @@ const landing = props => {
     if (hasFavs) {
       if (gotData === false) {
         // this boolean prevents the query from running more than once
-        fetch('/user/favorites/1') //update 1 to userId dynamically later
+        fetch(`/user/favorites/${props.userId}`) //update 1 to userId dynamically later
           .then(res => res.json())
           .then(data => {
             setGotData(true);
