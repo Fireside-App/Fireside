@@ -53,7 +53,6 @@ function logErrors(err, req, res, next) {
     message: { err: "An error occurred" }
   };
   const errorObj = Object.assign({}, defaultErr);
-  // console.log(errorObj.log);
   res.status(errorObj.status).json(errorObj.message);
 }
 

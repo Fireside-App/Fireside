@@ -10,16 +10,14 @@ userController.login = (req, res, next) => {
 
   db.query(text, user, (err, data) => {
     if (err) {
-      console.log(err);
       res.locals.badPassword = true;
       return next();
     }
 
-
     console.log("data from postgres: ", data.rows[0].password);
 
     if (data.rows[0].password !== password) {
-      console.log('password did not match');
+      console.log("password did not match");
       res.locals.badPassword = true;
       return next();
     } else {
@@ -107,7 +105,15 @@ userController.addCampFav = (req, res, next) => {
 
   // this is where we want to add favorites, make sure to extra from body
   const text = `INSERT INTO camps (name, pets, sewer, water, waterfront, long, lat) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
-  const values = [req.body.name, req.body.pets, req.body.sewer, req.body.water, req.body.waterfront, req.body.long, req.body.lat];
+  const values = [
+    req.body.name,
+    req.body.pets,
+    req.body.sewer,
+    req.body.water,
+    req.body.waterfront,
+    req.body.long,
+    req.body.lat
+  ];
 
   db.query(text, values)
     .then(response => {
@@ -116,20 +122,19 @@ userController.addCampFav = (req, res, next) => {
       return next();
     })
     .catch(err => {
-      console.log('Error: from adding campfavs', err);
+      console.log("Error: from adding campfavs", err);
       return next(err);
     });
-}
+};
 
 // Users table & Favs table will stay the same
 
 userController.getFav = (req, res, next) => {
-
   console.log(req.params, "THIS IS REQ PARAMS");
-  const value  = [req.params.id] ;
+  const value = [req.params.id];
 
   const text = `SELECT c.* FROM camps c INNER JOIN favorites f ON c.id = f.camp_id WHERE f.user_id = $1`;
-// we're requesting data from the req body
+  // we're requesting data from the req body
 
   db.query(text, value)
     .then(response => {
