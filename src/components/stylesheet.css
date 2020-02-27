@@ -64,7 +64,7 @@ body {
 .Login form {
   width: 350px;
   position: absolute;
-  bottom: 550px;
+  bottom: 60%;
 }
 
 .login-btns {
@@ -92,7 +92,7 @@ button a:hover {
   font-size: 1.4em;
   opacity: 0.5;
   margin-top: 0.6em;
-  color: whitesmoke;
+  /* color: whitesmoke; */
 }
 
 .Login .btn {
@@ -136,8 +136,9 @@ button a:hover {
 }
 
 .Landing h1 {
-  margin: 2% 0 15% 0;
+  margin: 2% 0 2% 0;
   font-size: 4em;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .Landing h3 {
@@ -165,6 +166,11 @@ button a:hover {
 .removeFavBtn:hover {
   background-color: rgb(255, 0, 0);
   opacity: 100%;
+  cursor: pointer;
+}
+
+.btn-primary {
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 /* QUERY PAGE */

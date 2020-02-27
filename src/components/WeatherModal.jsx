@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
-import Day from "./Day/Day.jsx";
-import { Modal } from "react-bootstrap";
-import moment from "moment-timezone";
+import React, { useState, useEffect } from 'react';
+import Day from './Day/Day.jsx';
+import { Modal } from 'react-bootstrap';
+import moment from 'moment-timezone';
 
 const months_arr = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "Jule",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'Jule',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
 ];
 
 function toTimeZone(time) {
@@ -57,7 +57,6 @@ const WeatherModal = props => {
         setLows(lowTemp);
         setRain(chanceOfRain);
         setDays(day);
-        console.log("dayyy>>>>>>>>>>>", day);
       });
   }, []);
   const weatherDays = [];

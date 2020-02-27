@@ -1,9 +1,7 @@
-
 import React, { Component, useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import { Favorite } from './Favorite';
-
 
 /* The Landing page is the page our users are presented with on login or signup. Here, we 
 meant to render our current favorites in cards that might provide additional details for the campsites 
@@ -33,6 +31,19 @@ const landing = props => {
     }
   }, []); // empty array keeps useEffect from running indefinitely, useEffect runs whenever favs is updated
 
+  // use the setFavs hook function to update
+  const removeFavorite = (user_id, camp_id) => {
+    const data = { user_id, camp_id };
+    fetch('/user/favorites/', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(data => {});
+  };
 
   // create array of Favorite components for every favorite returned from query into favs state
   const favoriteComponents = favs.map((favorite, idx) => {
