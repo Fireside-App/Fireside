@@ -39,9 +39,6 @@ const Login = props => {
             <Link to='/signup'>Sign Up</Link>
           </Button>
         </div>
-        {/* <Button bssize='lg' outline color='primary'>
-          Sign Up
-        </Button> */}
       </Form>
     </div>
   );

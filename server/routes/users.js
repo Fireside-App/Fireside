@@ -6,8 +6,7 @@ router.post(
   '/login',
   userController.login,
   /*userController.getFav,*/ (req, res) => {
-    console.log('outside of login middleware');
-    res.status(200).json(res.locals);
+    res.status(200).json(res.locals.user);
   }
 );
 
@@ -15,32 +14,26 @@ router.post('/signup', userController.createUser, (req, res) => {
   res.status(200).json(res.locals);
 });
 
-// router.get('/favorite', userController.getFav, (req, res) => {
-//     res.status(200).json()
-// });
-// we use router.use for a general case
+////////// FAVORITES ROUTES /////////////////////
 
-// this is old code
-// router.post('/favorite', userController.addCampground, userController.addFav, (req, res) => {
-//     res.status(200).json()
-// });
+/* when user clicks on the 'Favorite' button on the search results page
+adds the user_id and a camp_id to favorites, then adds all of the camp data to camps (unique table)*/
 router.post(
   '/favorites',
   userController.addCampFav,
   userController.addFav,
   (req, res, next) => {
-    console.log('RESPONSE OKAY');
     const newBody = [res.locals.campFavorites, res.locals.favorites];
-
-    // res.status(200).json(newBody);
     res.status(200).json(newBody);
   }
 );
 
+// retrieves all of the logged in user's favorite camps upon successful login
 router.get('/favorites/:id', userController.getFav, (req, res, next) => {
   res.status(200).json(res.locals);
 });
 
+// NOT IN USE
 router.delete('/deleteuser', userController.deleteUser, (req, res) => {
   res.status(200).json();
 });
