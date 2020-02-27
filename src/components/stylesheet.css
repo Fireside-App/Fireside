@@ -1,26 +1,18 @@
-/* * {
-  margin: 0;
-  padding: 0;
-} */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap');
 
-.app {
-  /* width: 100vh;
-  height: 100vh; */
-  /* margin: 0; */
+* {
+  font-family: 'Monteserrat', Helvetica, sans-serif;
 }
 
-.weather {
-  max-width: 300px;
-  max-height: 200px;
-  display: block;
-  background-color: bisque;
-}
-
-.container {
-  /* margin: 0;
-  padding: 0; */
-  /* flex-direction: column;
-  align-items: center; */
+body {
+  background-color: black;
+  background: url('../assets/fireside.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
 }
 
 .Signup {
@@ -57,14 +49,11 @@
 }
 
 .Login {
-  background: url('../assets/MountainTentLg.jpg') no-repeat center center fixed;
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  /* Preserve aspet ratio */
-  min-width: 100%;
-  min-height: 100%;
+  /* background: url('../assets/fireside.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; */
 
   display: flex;
   flex-direction: column;
@@ -73,28 +62,51 @@
 }
 
 .Login form {
-  width: 30%;
+  width: 350px;
+  position: absolute;
+  bottom: 550px;
+}
+
+.login-btns {
+  display: flex;
+  height: 50px;
+}
+
+button {
+  padding: 0 0;
+  width: 200px;
+  text-align: left;
+}
+
+button a {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+button a:hover {
+  text-decoration: none;
+  color: whitesmoke;
 }
 
 .Login input {
   font-size: 1.4em;
-  opacity: 0.6;
-  margin-top: 1em;
-  border: 1px solid #989898;
+  opacity: 0.5;
+  margin-top: 0.6em;
+  color: whitesmoke;
 }
 
-.Login a {
-  margin-left: 35%;
-  /* color: rgb(25, 90, 143); */
-  font-size: 1.1em;
-  /* opacity: 0.6; */
-}
-
-.Login button {
+.Login .btn {
   font-size: 1.3em;
   opacity: 0.8;
   color: whitesmoke;
   background-color: rgb(25, 90, 143);
+  margin-left: 10px;
+  margin-right: 10px;
+  border: none;
+}
+
+.Login .btn a {
+  margin: 0;
 }
 
 .Signup {
@@ -108,27 +120,19 @@
   min-height: 100%;
 }
 
+/* LANDING PAGE */
 .Landing {
   background: url('../assets/TentCanyonLg.jpg') no-repeat center center fixed;
   position: fixed;
   top: 0;
   left: 0;
 
-  /* Preserve aspet ratio */
-  min-width: 100%;
-  min-height: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   color: whitesmoke;
-}
-
-.Landing h1,
-h3 {
-  text-shadow: -1px 0 rgb(218, 81, 0), 0 1px rgb(218, 81, 0),
-    1px 0 rgb(218, 81, 0), 0 -1px rgb(218, 81, 0);
-  opacity: 0.8;
+  width: 100%;
+  height: 100%;
 }
 
 .Landing h1 {
@@ -141,26 +145,29 @@ h3 {
   font-size: 2em;
 }
 
-/* .Landing Button {
-  background-color: rgb(177, 67, 4);
-  font-size: 1.5em;
-  opacity: .8;
-  text-shadow: -1px 0 whitesmoke, 0 1px whitesmoke, 1px 0 whitesmoke, 0 -1px whitesmoke;
-  opacity: .8;
-  border: 2px;
-} */
-
-.Landing button {
-  background-color: whitesmoke;
-  opacity: 0.7;
-  font-size: 1.2em;
+.favsHeader {
+  text-shadow: 1px 1px 1px black;
 }
 
-.Landing button:hover {
-  border: 1px solid whitesmoke;
-  opacity: 0.7;
+.removeFavBtn {
+  background-color: rgb(255, 104, 104);
+  opacity: 40%;
+  color: rgba(255, 255, 255, 0.8);
+  transition: opacity 0.5s ease-in-out;
+  width: 130px;
+  height: 30px;
+  line-height: 30px;
+  margin-left: 5px;
+  border-radius: 3px;
+  text-align: center;
 }
 
+.removeFavBtn:hover {
+  background-color: rgb(255, 0, 0);
+  opacity: 100%;
+}
+
+/* QUERY PAGE */
 .Query {
   background: url('../assets/NightCampLg.jpg') no-repeat center center fixed;
   position: fixed;
@@ -231,7 +238,6 @@ h3 {
   color: rgb(236, 234, 234);
   text-shadow: -2px 0 rgb(0, 70, 46), 0 3px rgb(0, 70, 46), 3px 0 rgb(0, 70, 46),
     0 -2px rgb(0, 70, 46);
-  /* text-shadow: -2px 0 teal, 0 3px teal, 3px 0 teal, 0 -2px teal; */
   font-size: 3.5em;
   margin-top: 5%;
   margin-bottom: 5%;
@@ -268,7 +274,6 @@ thead {
   font-size: 1.2em;
   text-shadow: -1px 0 rgb(34, 34, 34), 0 1px rgb(34, 34, 34),
     1px 0 rgb(34, 34, 34), 0 -1px rgb(34, 34, 34);
-  /* opacity: 0.9; */
 }
 
 .findMore {
@@ -284,52 +289,3 @@ td .form-check-input {
   margin-left: 3%;
   background-color: rgba(255, 255, 255, 0.199);
 }
-
-.button {
-  font-size: 1.3em;
-  opacity: 0.8;
-  color: whitesmoke;
-  background-color: rgb(25, 90, 143);
-}
-
-/* .queryContainer {
-  width: 50%;
-  background-color: powderblue;
-  opacity: 1;
-  display: flex;
-  align-items: center;
-  margin: 0;
-} */
-
-/* .Form {
-  margin: 40% auto;
-  opacity: 1;
-  width: 70%;
-} */
-
-/* div {
-  text-align: center;
-  margin: 0 auto;
-  width: 90%;
-} */
-
-/* .LoginBtn {
-  margin-left: 60%;
-  height: 30%;
-  width: 30%;
-}
-
-span {
-  display: block;
-  text-align: center;
-  font-size: 3em;
-  margin: 5% auto;
-}
-
-h1 {
-  font-size: 5em;
-}
-
-a {
-  margin-left: 70%;
-} */

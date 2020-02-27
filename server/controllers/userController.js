@@ -1,6 +1,6 @@
-const fetch = require('node-fetch');
+const fetch = require("node-fetch");
 const userController = {};
-const db = require('../index.js');
+const db = require("../index.js");
 
 userController.login = (req, res, next) => {
   const user = [req.body.username];
@@ -11,17 +11,20 @@ userController.login = (req, res, next) => {
   db.query(text, user, (err, data) => {
     if (err) {
       console.log(err);
-      return next(err);
+      res.locals.badPassword = true;
+      return next();
     }
 
-    console.log('data from postgres: ', data.rows[0].password);
+
+    console.log("data from postgres: ", data.rows[0].password);
 
     if (data.rows[0].password !== password) {
       console.log('password did not match');
-      return next(err);
+      res.locals.badPassword = true;
+      return next();
     } else {
       res.locals.user = data.rows[0];
-      console.log(res.locals, 'this is locals inside login middleware');
+      console.log(res.locals, "this is locals inside login middleware");
       return next();
     }
   });
@@ -47,23 +50,24 @@ userController.deleteUser = (req, res, next) => {
 };
 
 userController.createUser = (req, res, next) => {
+  const name = req.body.name;
   const user = req.body.username;
   const password = req.body.password;
 
-  console.log('expresscreate user: ', user);
-  console.log('expresscreate pass: ', password);
+  console.log("expresscreate user: ", user);
+  console.log("expresscreate pass: ", password);
 
-  const text = `INSERT INTO users (username, password, loggedin) VALUES ($1, $2, $3)`;
-  const values = [user, password, true];
+  const text = `INSERT INTO users (name, username, password) VALUES ($1, $2, $3)`;
+  const values = [name, user, password];
 
   db.query(text, values)
     .then(response => {
-      console.log('res in login: ', response);
+      console.log("res in login: ", response);
       res.locals.user = response.rows;
       return next();
     })
     .catch(err => {
-      console.log('Error: ', err);
+      console.log("Error: ", err);
       return next(err);
     });
 };
@@ -93,25 +97,47 @@ userController.addFav = (req, res, next) => {
       return next();
     })
     .catch(err => {
-      console.log('Error: from adding favorites', err);
+      console.log("Error: from adding favorites", err);
       return next(err);
     });
 };
 
+userController.addCampFav = (req, res, next) => {
+  console.log(req.body, "REQ BODY SUCCESSFUL FOR CAMPFAV");
+
+  // this is where we want to add favorites, make sure to extra from body
+  const text = `INSERT INTO camps (name, pets, sewer, water, waterfront, long, lat) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
+  const values = [req.body.name, req.body.pets, req.body.sewer, req.body.water, req.body.waterfront, req.body.long, req.body.lat];
+
+  db.query(text, values)
+    .then(response => {
+      // grabbing the response and then adding it to res locals favorites
+      res.locals.favoriteCamps = response;
+      return next();
+    })
+    .catch(err => {
+      console.log('Error: from adding campfavs', err);
+      return next(err);
+    });
+}
+
+// Users table & Favs table will stay the same
+
 userController.getFav = (req, res, next) => {
 
-  const text = `SELECT * FROM campground WHERE campground_id in
-  (
-  select campground_id from favorites where user_id = ${req.body.user_id}
-  )`;
+  console.log(req.params, "THIS IS REQ PARAMS");
+  const value  = [req.params.id] ;
+
+  const text = `SELECT c.* FROM camps c INNER JOIN favorites f ON c.id = f.camp_id WHERE f.user_id = $1`;
 // we're requesting data from the req body
+
   db.query(text, value)
     .then(response => {
       res.locals.user = response.rows;
       return next();
     })
     .catch(err => {
-      console.log('Error: from GETTING FAVORITES', err);
+      console.log("Error: from GETTING FAVORITES", err);
       return next(err);
     });
 };
@@ -127,7 +153,7 @@ userController.deleteFav = (req, res, next) => {
       return next();
     })
     .catch(err => {
-      console.log('Error: ', err);
+      console.log("Error: ", err);
       return next(err);
     });
 };

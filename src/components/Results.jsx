@@ -27,7 +27,7 @@ INSERT INTO the favorites table on the database with both the userID and the lis
 
 const Results = props => {
   const { queriedGrounds, getWeather } = props;
-  
+
   let homeButton;
   let tableResults;
 
@@ -82,7 +82,7 @@ const Results = props => {
               <th>Weather</th>
             </tr>
           </thead>
-      <tbody>{results}</tbody>
+          <tbody>{results}</tbody>
         </Table>
       </div>
       {/* {homeButton} */}

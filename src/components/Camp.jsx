@@ -15,7 +15,6 @@ import {
 } from "reactstrap";
 import WeatherModal from "./WeatherModal.jsx";
 
-
 /*
 As mentioned in Results.jsx, the major work in Camp.jsx that needs to be done includes creating a function
 in App.jsx that can add each of our favorites to an array in state. 
@@ -33,51 +32,63 @@ const Camp = props => {
     sitesWithWaterFront,
     state
   } = camp;
-  const [showModal, setShow]= useState(false);
+  const [showModal, setShow] = useState(false);
 
   let fav = <button type="radio" name={`fav${facilityName}`} />;
-  console.log("camp here::::", camp);
 
   function closeModal() {
-    setShow(false)
+    setShow(false);
   }
-  // if(star.isFav){
-  //     star = solidStar
-  // } else {
-  //     star = regStar
-  // }
 
-  // let FavIcon;
-  // if (isFav) FavIcon = (<span className="favIcon"><FAIcon onClick={() => favClicked(id)} icon={solidStar} style={{ color: 'steelblue' }} /></span>);
-  // else FavIcon = (<span className="favIcon"><FAIcon onClick={() => favClicked(id)} icon={regStar} /></span>);
-
-
-    // let FavIcon;
-    // if (isFav) FavIcon = (<span className="favIcon"><FAIcon onClick={() => favClicked(id)} icon={solidStar} style={{ color: 'steelblue' }} /></span>);
-    // else FavIcon = (<span className="favIcon"><FAIcon onClick={() => favClicked(id)} icon={regStar} /></span>);
-
-    return (
-        // <ReactFragment className="CampFrag">
-            <tr className="CampRow">
-                <td><strong>{facilityName}</strong></td>
-                <td><strong>{sitesWithPetsAllowed}</strong></td>
-                <td><strong>{sitesWithSewerHookup}</strong></td>
-                <td><strong>{sitesWithWaterHookup}</strong></td>
-                <td><strong>{sitesWithWaterFront}</strong></td>
-                <td id="longitude"><strong>{longitude}</strong></td>
-                <td id="latitude" value={latitude}><strong>{latitude}</strong></td>
-                <td className="fav"><strong>{fav}</strong></td>
-                <td><button className="fav" onClick={e => {
-                  setShow(true)
-                }}
-                >Get Weather</button></td>
-              <div>
-                  <WeatherModal close={closeModal} showModal={showModal} latitude={latitude} longitude={longitude}
-                  getWeather={props.getWeather}/>
-              </div>
-            </tr>
-        // </ReactFragment>
-    )
+  return (
+    // <ReactFragment className="CampFrag">
+    <tr className="CampRow">
+      <td>
+        <strong>{facilityName}</strong>
+      </td>
+      <td>
+        <strong>{sitesWithPetsAllowed}</strong>
+      </td>
+      <td>
+        <strong>{sitesWithSewerHookup}</strong>
+      </td>
+      <td>
+        <strong>{sitesWithWaterHookup}</strong>
+      </td>
+      <td>
+        <strong>{sitesWithWaterFront}</strong>
+      </td>
+      <td id="longitude">
+        <strong>{longitude}</strong>
+      </td>
+      <td id="latitude" value={latitude}>
+        <strong>{latitude}</strong>
+      </td>
+      <td className="fav">
+        <strong>{fav}</strong>
+      </td>
+      <td>
+        <button
+          className="fav"
+          onClick={e => {
+            setShow(true);
+          }}
+        >
+          Get Weather
+        </button>
+      </td>
+      <div>
+        <WeatherModal
+          close={closeModal}
+          showModal={showModal}
+          latitude={latitude}
+          longitude={longitude}
+          getWeather={props.getWeather}
+        />
+      </div>
+    </tr>
+    // </ReactFragment>
+  );
 };
 
 export default Camp;
