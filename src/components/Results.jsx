@@ -32,7 +32,7 @@ const Results = props => {
   let tableResults;
 
   const results = queriedGrounds.map(curr => {
-    return <Camp camp={curr} getWeather={getWeather}/>;
+    return <Camp camp={curr} getWeather={getWeather} />;
   });
 
   // if(results.length > 0){

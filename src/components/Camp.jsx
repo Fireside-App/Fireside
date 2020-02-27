@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 // import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 // import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 // import { faStar as regStar } from '@fortawesome/free-regular-svg-icons';
@@ -13,6 +13,8 @@ import {
   FormText,
   Table
 } from "reactstrap";
+import WeatherModal from "./WeatherModal.jsx";
+
 
 /*
 As mentioned in Results.jsx, the major work in Camp.jsx that needs to be done includes creating a function
@@ -31,9 +33,14 @@ const Camp = props => {
     sitesWithWaterFront,
     state
   } = camp;
+  const [showModal, setShow]= useState(false);
 
   let fav = <button type="radio" name={`fav${facilityName}`} />;
   console.log("camp here::::", camp);
+
+  function closeModal() {
+    setShow(false)
+  }
   // if(star.isFav){
   //     star = solidStar
   // } else {
@@ -60,12 +67,19 @@ const Camp = props => {
                 <td id="longitude"><strong>{longitude}</strong></td>
                 <td id="latitude" value={latitude}><strong>{latitude}</strong></td>
                 <td className="fav"><strong>{fav}</strong></td>
-                <td><button className="fav" onClick={()=>props.getWeather(latitude, longitude)}
+                <td><button className="fav" onClick={e => {
+                  setShow(true)
+                }}
                 >Get Weather</button></td>
+              <div>
+                  <WeatherModal close={closeModal} showModal={showModal} latitude={latitude} longitude={longitude}
+                  getWeather={props.getWeather}/>
+              </div>
             </tr>
         // </ReactFragment>
     )
-
 };
 
 export default Camp;
+
+// ()=>props.getWeather(latitude, longitude)

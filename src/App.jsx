@@ -7,6 +7,8 @@ import Results from "./components/Results.jsx";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Signup from "./components/Signup.jsx";
 import { Button } from "reactstrap";
+import Modal from 'react-modal';
+
 
 import "./components/stylesheet.css";
 
@@ -49,7 +51,7 @@ class App extends Component {
       hasFavs: false,
       loggedIn: false,
       signedUp: false,
-      userId: -1
+      userId: -1,
     };
 
     this.signup = this.signup.bind(this);
@@ -60,13 +62,15 @@ class App extends Component {
     this.waterFrontOnChange = this.waterFrontOnChange.bind(this);
     this.stateOnChange = this.stateOnChange.bind(this);
     this.query = this.query.bind(this);
-    this.getWeather = this.getWeather.bind(this);
-
   }
 
   componentDidMount() {
     console.log("mounted");
   }
+
+  // setShowModal(e) {
+  //   this.setState({showModal: true})
+  // }
 
   signup(e) {
     e.preventDefault();
@@ -211,20 +215,6 @@ class App extends Component {
     }
   }
 
-  getWeather(lat, long)  {
-    // console.log('eeeeeeekfj;kaj', e.target)
-
-    fetch(`https://api.darksky.net/forecast/6de6c91d1869c981b49f8ffa13fcd509/${lat},${long}?exclude=currently,minutely,hourly,alerts,flags`)
-    .then(res => res.json())
-    .then(data => {
-      console.log('data>>>>', data)
-      // const newState = Object.assign({}, this.state);
-      // newState.queriedGrounds = data;
-      // newState.queried = true;
-      // console.log(newState);
-      // this.setState(newState);
-    });
-  }
 
   render() {
     //variable declared for dynamic rendering of our pages based upon the results of async fetch requests
@@ -263,7 +253,9 @@ class App extends Component {
             exact
             path="/results"
             render={() => (
-              <Results queriedGrounds={this.state.queriedGrounds} getWeather={this.getWeather}/>
+              <Results queriedGrounds={this.state.queriedGrounds} 
+              getWeather={this.getWeather} 
+              />
             )}
           />
           <Route exact path="/signup">

@@ -9,6 +9,13 @@
   /* margin: 0; */
 }
 
+.weather {
+  max-width: 300px;
+  max-height: 200px;
+  display: block;
+  background-color: bisque;
+}
+
 .container {
   /* margin: 0;
   padding: 0; */
