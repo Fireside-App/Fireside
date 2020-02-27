@@ -242,7 +242,10 @@ class App extends Component {
         <Switch>
           <Route exact path="/">
             {loggedin ? (
-              <Landing hasFavs={this.state.hasFavs} />
+              <Landing
+                hasFavs={this.state.hasFavs}
+                userId={this.state.userId}
+              />
             ) : (
               <Login
                 invalidUsername={this.state.invalidUsername}
@@ -284,10 +287,16 @@ class App extends Component {
           </Route>
           <Route path="/landing">
             {queryResponse ? <Redirect to="/" /> : <Login login={this.login} />}
-            render = {() => <Landing hasFavs={this.state.hasFavs} />}
+            render ={" "}
+            {() => (
+              <Landing
+                hasFavs={this.state.hasFavs}
+                userId={this.state.userId}
+              />
+            )}
           </Route>
           <Route exact path="/landing/ayypresent">
-            <Landing hasFavs={this.state.hasFavs} />
+            <Landing hasFavs={this.state.hasFavs} userId={this.state.userId} />
           </Route>
         </Switch>
       </div>
