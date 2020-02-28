@@ -102,7 +102,7 @@ const Query = props => {
           <FormGroup check>
             <Label check>
               <Input
-                type="radio"
+                type="checkbox"
                 name="radio1"
                 id="pet"
                 onChange={petOnChange}
@@ -113,7 +113,7 @@ const Query = props => {
           <FormGroup check>
             <Label check>
               <Input
-                type="radio"
+                type="checkbox"
                 name="radio2"
                 id="sewerHook"
                 onChange={sewerHookOnChange}
@@ -124,7 +124,7 @@ const Query = props => {
           <FormGroup check>
             <Label check>
               <Input
-                type="radio"
+                type="checkbox"
                 name="radio3"
                 id="waterHook"
                 onChange={waterHookOnChange}
@@ -135,7 +135,7 @@ const Query = props => {
           <FormGroup check>
             <Label check>
               <Input
-                type="radio"
+                type="checkbox"
                 name="radio4"
                 id="waterFront"
                 onChange={waterFrontOnChange}

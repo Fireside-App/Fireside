@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap');
 
 * {
-  font-family: 'Monteserrat', Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -138,16 +138,11 @@ button a:hover {
 .Landing h1 {
   margin: 2% 0 2% 0;
   font-size: 4em;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .Landing h3 {
   margin-top: 5%;
   font-size: 2em;
-}
-
-.favsHeader {
-  text-shadow: 1px 1px 1px black;
 }
 
 .removeFavBtn {
@@ -188,16 +183,67 @@ button a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
+/* START: FORM PAGE STYLING */
 .Query form {
-  color: whitesmoke;
-  opacity: 0.8;
+  text-align: center;
+  color: #fff;
+  opacity: 1;
   font-size: 1.2em;
-  text-shadow: -2px 0 rgb(34, 34, 34), 0 2px rgb(34, 34, 34),
-    2px 0 rgb(34, 34, 34), 0 -2px rgb(34, 34, 34);
-  letter-spacing: 0.7px;
+  color: #333;
+  max-height: 600px;
+  width: 700px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: thin double rgb(194, 87, 0);
+  border-radius: 20px;
 }
+
+.states.form-group {
+  margin-top: 2em;
+}
+
+#app > div > div > form > div > label > strong {
+  /* margin-top: 19px; */
+  /* margin-bottom: 31px; */
+  font-size: 2.5rem;
+  position: relative;
+  z-index: 99;
+  color: white;
+  word-wrap: none;
+}
+
+select#stateSelect {
+  text-align: center;
+  margin: 1rem auto;
+  font-size: 2rem;
+}
+
+#app > div > div > form > fieldset > legend > strong {
+  font-size: 2.5rem;
+}
+
+#app > div > div > form > fieldset div {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  color: rgba(200, 240, 215, 0.842);
+}
+
+#app > div > div > form > fieldset div:hover {
+  color: rgb(0, 138, 7);
+}
+
+input#pet,
+input#sewerHook,
+input#waterHook,
+input#waterFront {
+  height: 20px;
+  width: 20px;
+  margin: 1vh -4vw;
+}
+
+/* END: FORM PAGE STYLING */
 
 .header {
   color: rgb(201, 201, 201);
@@ -218,6 +264,7 @@ button a:hover {
   border: 2px solid whitesmoke;
   font-size: 1.1em;
 }
+
 .QueryButton:hover {
   background-color: whitesmoke;
   color: rgb(0, 70, 46);
@@ -241,8 +288,6 @@ button a:hover {
 
 .Results h1 {
   color: rgb(236, 234, 234);
-  text-shadow: -2px 0 rgb(0, 70, 46), 0 3px rgb(0, 70, 46), 3px 0 rgb(0, 70, 46),
-    0 -2px rgb(0, 70, 46);
   font-size: 3.5em;
   margin-top: 5%;
   margin-bottom: 5%;
@@ -269,22 +314,19 @@ table {
 thead {
   color: whitesmoke;
   font-size: 1.5em;
-  text-shadow: -1px 0 rgb(34, 34, 34), 0 1px rgb(34, 34, 34),
-    1px 0 rgb(34, 34, 34), 0 -1px rgb(34, 34, 34);
   /* opacity: 0.9; */
 }
 
 .CampRow {
   color: whitesmoke;
   font-size: 1.2em;
-  text-shadow: -1px 0 rgb(34, 34, 34), 0 1px rgb(34, 34, 34),
-    1px 0 rgb(34, 34, 34), 0 -1px rgb(34, 34, 34);
 }
 
 .findMore {
   font-size: 1.2em;
   opacity: 0.8;
 }
+
 td button {
   width: 20px;
 }
@@ -292,4 +334,75 @@ td button {
 td .form-check-input {
   margin-left: 3%;
   background-color: rgba(255, 255, 255, 0.199);
+}
+
+/* Weather stuff */
+.getWeather {
+  background-color: rgb(255, 104, 104);
+  color: rgba(255, 255, 255, 0.8);
+  transition: opacity 0.5s ease-in-out;
+  width: 130px;
+  height: 30px;
+  line-height: 30px;
+  margin-left: 5px;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.modal-content {
+  width: 800px;
+  text-align: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border: thin double #32a1ce;
+}
+
+.weather-container {
+  display: flex;
+  flex-grow: auto;
+  flex-wrap: wrap;
+  width: 800px;
+  padding: 5px;
+  margin: 15px;
+}
+
+.card.text-white.card-body {
+  background: #333;
+  height: auto;
+  margin: 10px;
+  height: 250px;
+  width: 150px;
+  color: orange;
+  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.4);
+}
+
+.card.text-white.card-body:hover {
+  transform: scale(1.1);
+}
+
+.card-title {
+  font-weight: 900;
+  color: orange;
+}
+
+body > div.fade.modal.show > div > div > center {
+  font-weight: 900;
+  color: #333;
+  font-size: 50px;
+}
+
+/* this is the styling for the close button on the weather  */
+body > div.fade.modal.show > div > div > button {
+  font-weight: 600;
+  color: red;
+  padding-left: 9px;
+  font-size: 20px;
+  border-radius: 20px;
+  height: 40px;
+  width: 80px;
+  opacity: 0.5;
+}
+
+body > div.fade.modal.show > div > div > button:hover {
+  opacity: 1;
 }
