@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import Camp from './Camp.jsx';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import {
@@ -27,6 +27,14 @@ INSERT INTO the favorites table on the database with both the userID and the lis
 
 const Results = props => {
   const { queriedGrounds, getWeather } = props;
+
+  // deconstruct hook to hold latitude/longitude locally
+
+  const [longitudes, setLongitude] = useState([]);
+  const [latitudes, setLatitude] = useState([]);
+
+  console.log(queriedGrounds, 'this is query GROUNDS information');
+  const longAndLat = queriedGrounds.map((current, index) => {});
 
   let homeButton;
   let tableResults;
@@ -76,8 +84,9 @@ const Results = props => {
               <th>Sewer-hookup</th>
               <th>Water-hookup</th>
               <th>waterfront</th>
-              <th>Longitude</th>
-              <th>Latitude</th>
+              {/* <th>Longitude</th> */}
+              {/* <th>Latitude</th> */}
+              <th>Map It</th>
               <th>Favorite</th>
               <th>Weather</th>
             </tr>
