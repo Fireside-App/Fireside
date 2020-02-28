@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import Camp from "./Camp.jsx";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import React, { Component, useState, useEffect } from 'react';
+import Camp from './Camp.jsx';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import {
   Container,
   Button,
@@ -10,7 +10,7 @@ import {
   Input,
   FormText,
   Table
-} from "reactstrap";
+} from 'reactstrap';
 
 /* the returnHome button here is currently hard coded to link back to our landing page at a presentation link
 this button's functionality needs to be better fleshed out or maybe the routing needs to be fixed. 
@@ -27,6 +27,15 @@ INSERT INTO the favorites table on the database with both the userID and the lis
 
 const Results = props => {
   const { queriedGrounds, getWeather } = props;
+
+  // deconstruct hook to hold latitude/longitude locally
+
+  const [longitudes, setLongitude] = useState([]);
+  const [latitudes, setLatitude] = useState([]);
+
+  console.log(queriedGrounds, 'this is query GROUNDS information');
+  const longAndLat = queriedGrounds.map((current, index) => {});
+
   let homeButton;
   let tableResults;
 
@@ -34,29 +43,29 @@ const Results = props => {
     return <Camp userId={props.userId} camp={curr} getWeather={getWeather} />;
   });
   return (
-    <div className="Results">
+    <div className='Results'>
       <h1>Your Next Adventure Awaits</h1>
-      <Link to="/">
+      <Link to='/'>
         <Button
-          className="returnHome"
+          className='returnHome'
           onClick={props.resetQueried}
           outline
-          color="info"
+          color='info'
         >
-          Return Home{" "}
+          Return Home{' '}
         </Button>
       </Link>
       <div
         style={{
-          maxHeight: "800px",
-          overflowY: "auto"
+          maxHeight: '800px',
+          overflowY: 'auto'
         }}
       >
         <Table
           userId={props.userId}
-          className="Table"
+          className='Table'
           scrollY
-          maxHeight="400px"
+          maxHeight='400px'
         >
           <thead>
             <tr>
@@ -65,8 +74,9 @@ const Results = props => {
               <th>Sewer-hookup</th>
               <th>Water-hookup</th>
               <th>waterfront</th>
-              <th>Longitude</th>
-              <th>Latitude</th>
+              {/* <th>Longitude</th> */}
+              {/* <th>Latitude</th> */}
+              <th>Map It</th>
               <th>Favorite</th>
               <th>Weather</th>
             </tr>

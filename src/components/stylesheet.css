@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap');
 
 * {
   font-family: Arial, Helvetica, sans-serif;
@@ -6,7 +6,7 @@
 
 body {
   background-color: black;
-  background: url("../assets/fireside.jpg") no-repeat center center fixed;
+  background: url('../assets/fireside.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -110,7 +110,7 @@ button a:hover {
 }
 
 .Signup {
-  background: url("../assets/RVLg.jpg") no-repeat center center fixed;
+  background: url('../assets/RVLg.jpg') no-repeat center center fixed;
   position: fixed;
   top: 0;
   left: 0;
@@ -122,7 +122,7 @@ button a:hover {
 
 /* LANDING PAGE */
 .Landing {
-  background: url("../assets/TentCanyonLg.jpg") no-repeat center center fixed;
+  background: url('../assets/TentCanyon.jpg') no-repeat center center fixed;
   position: fixed;
   top: 0;
   left: 0;
@@ -170,7 +170,7 @@ button a:hover {
 
 /* QUERY PAGE */
 .Query {
-  background: url("../assets/NightCampLg.jpg") no-repeat center center fixed;
+  background: url('../assets/NightCampLg.jpg') no-repeat center center fixed;
   position: fixed;
   top: 0;
   left: 0;
@@ -204,7 +204,7 @@ button a:hover {
   margin-top: 2em;
 }
 
-#app>div>div>form>div>label>strong {
+#app > div > div > form > div > label > strong {
   /* margin-top: 19px; */
   /* margin-bottom: 31px; */
   font-size: 2.5rem;
@@ -220,18 +220,18 @@ select#stateSelect {
   font-size: 2rem;
 }
 
-#app>div>div>form>fieldset>legend>strong {
+#app > div > div > form > fieldset > legend > strong {
   font-size: 2.5rem;
 }
 
-#app>div>div>form>fieldset div {
+#app > div > div > form > fieldset div {
   margin-top: 20px;
   font-size: 1.5rem;
-  color: rgba(200, 240, 215, 0.842)
+  color: rgba(200, 240, 215, 0.842);
 }
 
-#app>div>div>form>fieldset div:hover {
-  color: rgb(0, 138, 7)
+#app > div > div > form > fieldset div:hover {
+  color: rgb(0, 138, 7);
 }
 
 input#pet,
@@ -272,7 +272,7 @@ input#waterFront {
 }
 
 .Results {
-  background: url("../assets/LakeHouseLg.jpg") no-repeat center center fixed;
+  background: url('../assets/LakeHouseLg.jpg') no-repeat center center fixed;
   position: fixed;
   top: 0;
   left: 0;
@@ -378,7 +378,6 @@ td .form-check-input {
 
 .card.text-white.card-body:hover {
   transform: scale(1.1);
-
 }
 
 .card-title {
@@ -386,15 +385,14 @@ td .form-check-input {
   color: orange;
 }
 
-body>div.fade.modal.show>div>div>center {
+body > div.fade.modal.show > div > div > center {
   font-weight: 900;
   color: #333;
   font-size: 50px;
-
 }
 
 /* this is the styling for the close button on the weather  */
-body>div.fade.modal.show>div>div>button {
+body > div.fade.modal.show > div > div > button {
   font-weight: 600;
   color: red;
   padding-left: 9px;
@@ -405,6 +403,6 @@ body>div.fade.modal.show>div>div>button {
   opacity: 0.5;
 }
 
-body>div.fade.modal.show>div>div>button:hover {
+body > div.fade.modal.show > div > div > button:hover {
   opacity: 1;
 }

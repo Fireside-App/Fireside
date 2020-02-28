@@ -67,6 +67,147 @@ class App extends Component {
   //   this.setState({showModal: true})
   // }
 
+  /****************** 
+  
+  START: THIS IS FOR THE MAP REACT API 
+  
+  *******************/
+  makeMapModal() {
+    return (
+      <ReactMapGL
+        {...viewport}
+        mapStyle='mapbox://styles/ibeeliot/ck6txraky1w5p1ioyu648l89x'
+        onViewportChange={setViewport}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        onDblClick={showAddMarkerPopup}
+      >
+        {logEntries.map(entry => (
+          <div key={entry._id}>
+            <Marker
+              latitude={Number(entry.latitude)}
+              longitude={Number(entry.longitude)}
+
+              // offsetLeft={-12}
+              // offsetTop={-24}
+            >
+              <svg
+                className='marker'
+                viewBox='0 0 24 24'
+                style={{
+                  width: `${8 * viewport.zoom}`,
+                  height: `${8 * viewport.zoom}`
+                }}
+                stroke='#0000ff'
+                strokeWidth='2.5'
+                fill='none'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                onClick={() =>
+                  // this will turn ALL showPopup instances (with their entry IDs) all to true
+                  setShowPopup({
+                    showPopup,
+                    [entry._id]: true
+                  })
+                }
+              >
+                <path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'></path>
+                <circle cx='12' cy='10' r='3'></circle>
+              </svg>
+            </Marker>
+            {showPopup[entry._id] ? (
+              <Popup
+                latitude={Number(entry.latitude)}
+                longitude={Number(entry.longitude)}
+                anchor='top'
+                closeButton={true}
+                closeOnClick={true}
+                dynamicPosition={true}
+                onClose={() => setShowPopup({ showPopup, [entry._id]: false })}
+              >
+                <div className='popup'>
+                  <h3>{entry.title}</h3>
+                  <p>{entry.comments}</p>
+                  <p>
+                    Visited On: {new Date(entry.visitDate).toLocaleDateString()}
+                  </p>
+                  {/* I'm saying if this entry image exists aka the user has provided a working
+                link, then go ahead and create an image tag that will have the properties
+                for you to be able to input as the src and alt values. You can do an inline-css
+                style as well but be sure to use double style={{}} syntax */}
+                  {entry.image ? (
+                    <img src={entry.image} alt={entry.title} />
+                  ) : null}
+                </div>
+              </Popup>
+            ) : null}
+          </div>
+        ))}
+        {addEntryLocation ? (
+          <div>
+            <Marker
+              key={addEntryLocation._id}
+              latitude={Number(addEntryLocation.latitude)}
+              longitude={Number(addEntryLocation.longitude)}
+
+              // offsetLeft={-12}
+              // offsetTop={-24}
+            >
+              <svg
+                className='yellowMarker'
+                viewBox='0 0 24 24'
+                style={{
+                  width: `${8 * viewport.zoom}`,
+                  height: `${8 * viewport.zoom}`
+                }}
+                stroke='#00FF00'
+                strokeWidth='2.5'
+                fill='none'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                onClick={() =>
+                  // this will turn ALL showPopup instances (with their addEntryLocation IDs) all to true
+                  setShowPopup({
+                    ...showPopup,
+                    [addEntryLocation._id]: true
+                  })
+                }
+              >
+                <path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'></path>
+                <circle cx='12' cy='10' r='3'></circle>
+              </svg>
+            </Marker>
+            <Popup
+              latitude={Number(addEntryLocation.latitude)}
+              longitude={Number(addEntryLocation.longitude)}
+              anchor='top'
+              closeButton={true}
+              closeOnClick={true}
+              dynamicPosition={true}
+              onClose={() => setAddEntryLocation(null)}
+            >
+              <div className='popup'>
+                <LogEntryForm
+                  onClose={() => {
+                    // calls parent and sets location to null, which hides the form
+                    // then gets all entries available
+                    setAddEntryLocation(null);
+                    getEntries();
+                  }}
+                  location={addEntryLocation}
+                />
+              </div>
+            </Popup>
+          </div>
+        ) : null}
+      </ReactMapGL>
+    );
+  }
+  /****************** 
+  
+  END: THIS IS FOR THE MAP REACT API 
+  
+  *******************/
+
   signup(e) {
     e.preventDefault();
     const name = e.target.name.value;
