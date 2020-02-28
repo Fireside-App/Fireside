@@ -1,5 +1,5 @@
-const { Pool } = require("pg");
-const PG_URI = require("./PG_URI.js");
+const { Pool } = require('pg');
+const PG_URI = require('./PG_URI.js');
 
 /*
 this is a link to eli's elephantSQL. it would be better practice to store the db key in the .env

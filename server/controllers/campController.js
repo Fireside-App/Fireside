@@ -1,9 +1,9 @@
-const fs = require("fs");
-const path = require("path");
-const axios = require("axios");
-const parseString = require("xml2js").parseString;
+const fs = require('fs');
+const path = require('path');
+const axios = require('axios');
+const parseString = require('xml2js').parseString;
 
-require("dotenv").config();
+require('dotenv').config();
 
 const campController = {};
 
@@ -13,30 +13,30 @@ campController.query = (req, res, next) => {
   //this logic builds our api query string based upon the parameters passed back
   //to the server by our React App query page.
 
-  let apiString = "http://api.amp.active.com/camping/campgrounds?pstate=";
+  let apiString = 'http://api.amp.active.com/camping/campgrounds?pstate=';
 
   apiString += state;
 
   if (pet === true) {
-    apiString += "&pets=3010";
+    apiString += '&pets=3010';
   }
   if (sewerHook == true) {
-    apiString += "&sewer=3007";
+    apiString += '&sewer=3007';
   }
   if (waterHook === true) {
-    apiString += "&water=3007";
+    apiString += '&water=3007';
   }
   if (waterFront === true) {
-    apiString += "&waterfront=3011";
+    apiString += '&waterfront=3011';
   }
-  apiString += "&api_key=";
+  apiString += '&api_key=';
 
   const campOptions = {
     url: (apiString += process.env.CAMPGROUND_KEY),
-    method: "GET",
+    method: 'GET',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json;charset=UTF-8"
+      Accept: 'application/json',
+      'Content-Type': 'application/json;charset=UTF-8'
     }
   };
 
@@ -50,19 +50,19 @@ campController.query = (req, res, next) => {
         superParse = result.resultset.result;
       });
 
-      let arrData = superParse.map(curr => curr["$"]);
+      let arrData = superParse.map(curr => curr['$']);
 
       if (pet) {
-        arrData = arrData.filter(curr => curr.sitesWithPetsAllowed === "Y");
+        arrData = arrData.filter(curr => curr.sitesWithPetsAllowed === 'Y');
       }
       if (sewerHook) {
-        arrData = arrData.filter(curr => curr.sitesWithSewerHookup === "Y");
+        arrData = arrData.filter(curr => curr.sitesWithSewerHookup === 'Y');
       }
       if (waterHook) {
-        arrData = arrData.filter(curr => curr.sitesWithWaterHookup === "Y");
+        arrData = arrData.filter(curr => curr.sitesWithWaterHookup === 'Y');
       }
       if (waterFront) {
-        arrData = arrData.filter(curr => curr.sitesWithWaterfront !== "");
+        arrData = arrData.filter(curr => curr.sitesWithWaterfront !== '');
       }
 
       res.locals.campgrounds = arrData;
