@@ -20,11 +20,12 @@ userController.login = (req, res, next) => {
     }
 
     if (data.rows[0].password !== password) {
-      console.log("password did not match");
       res.locals.badPassword = true;
       return next();
     } else {
       res.locals.user = data.rows[0];
+      console.log("res.locals.user: ", res.locals.user);
+
       return next();
     }
   });
@@ -34,7 +35,7 @@ userController.setSSIDCookie = (req, res, next) => {
 };
 
 userController.deleteUser = (req, res, next) => {
-  const user = JSON.stringify(req.body.username);
+  const user = JSON.stringify(req.body.email);
 
   const text = `DELETE FROM users WHERE username = $1`;
   const value = [user];
@@ -54,11 +55,8 @@ userController.deleteUser = (req, res, next) => {
 
 userController.createUser = (req, res, next) => {
   const name = req.body.name;
-  const user = req.body.username;
+  const user = req.body.email;
   const password = req.body.password;
-
-  console.log("expresscreate user: ", user);
-  console.log("expresscreate pass: ", password);
 
   const text = `INSERT INTO users (name, username, password) VALUES ($1, $2, $3)`;
   const values = [name, user, password];
@@ -75,27 +73,15 @@ userController.createUser = (req, res, next) => {
     });
 };
 
-userController.addCampground = (req, res, next) => {
-  // this is where we want to add the campground;
-};
-
-/*
-this addFav functionality has yet to be implemented. unsure of whether or not this middleware 
-will work with the way iteration teams will end up sending fav data back to the server. be sure to send 
-back userId when calling addFavs.
-*/
 userController.addFav = (req, res, next) => {
-  // const user = req.body.user;
-  // const campground = req.body.campground;
-  console.log(req.body, "THIS IS REQ BODY COMING FROM POST");
-
-  // this is where we want to add favorites, make sure to extra from body
+  /*favorites is a cache table containing only user_id and camp_id, it is populated with those two anytime a user favorites a camp. its purpose is to connect between the user table and the camps table*/
+  console.log(res.locals.newId);
+  const values = [res.locals.newId, req.body.user_id];
   const text = `INSERT INTO favorites (camp_id, user_id) VALUES ($1, $2)`;
-  const values = [req.body.user_id, req.body.camp_id];
+  console.log(values);
 
   db.query(text, values)
     .then(response => {
-      // grabbing the response and then adding it to res locals favorites
       res.locals.favorites = response;
       return next();
     })
@@ -106,10 +92,7 @@ userController.addFav = (req, res, next) => {
 };
 
 userController.addCampFav = (req, res, next) => {
-  console.log(req.body, "REQ BODY SUCCESSFUL FOR CAMPFAV");
-
-  // this is where we want to add favorites, make sure to extra from body
-  const text = `INSERT INTO camps (name, pets, sewer, water, waterfront, long, lat) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
+  const text = `INSERT INTO camps (name, pets, sewer, water, waterfront, long, lat) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`;
   const values = [
     req.body.name,
     req.body.pets,
@@ -122,6 +105,8 @@ userController.addCampFav = (req, res, next) => {
 
   db.query(text, values)
     .then(response => {
+      res.locals.newId = response.rows[0].id;
+
       // grabbing the response and then adding it to res locals favorites
       res.locals.favoriteCamps = response;
       return next();
@@ -144,6 +129,7 @@ userController.getFav = (req, res, next) => {
   db.query(text, value)
     .then(response => {
       res.locals.user = response.rows;
+      console.log("here 2", response.rows);
       return next();
     })
     .catch(err => {
@@ -153,7 +139,7 @@ userController.getFav = (req, res, next) => {
 };
 
 userController.deleteFav = (req, res, next) => {
-  const user = JSON.stringify(req.body.username);
+  const user = JSON.stringify(req.body.email);
   const campground = JSON.stringify(req.body.campground);
   const text = `DELETE FROM favorites
   WHERE campground_id = $1 AND user_id = $2`;

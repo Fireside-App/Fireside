@@ -120,10 +120,14 @@ class App extends Component {
       .then(res => res.json())
       .then(data => {
         if (data) {
-          const newState = Object.assign({}, this.state);
-          newState.loggedIn = true;
-          console.log("in here");
-          this.setState(newState);
+          this.setState(state => {
+            const copy = Object.assign({}, state);
+            copy.loggedIn = true;
+            copy.userId = data.id;
+            console.log("copy.userId: ", copy.userId);
+
+            return copy;
+          });
         }
       });
   }
@@ -243,8 +247,8 @@ class App extends Component {
           <Route exact path="/">
             {loggedin ? (
               <Landing
-                hasFavs={this.state.hasFavs}
                 userId={this.state.userId}
+                hasFavs={this.state.hasFavs}
               />
             ) : (
               <Login
@@ -264,6 +268,7 @@ class App extends Component {
                 sewerHookOnChange={this.sewerHookOnChange}
                 waterFrontOnChange={this.waterFrontOnChange}
                 query={this.query}
+                userId={this.state.userId}
               />
             )}
           </Route>
@@ -275,28 +280,29 @@ class App extends Component {
                 queriedGrounds={this.state.queriedGrounds}
                 getWeather={this.getWeather}
                 resetQueried={this.resetQueried}
+                userId={this.state.userId}
               />
             )}
           />
           <Route exact path="/signup">
             {signedUp ? (
-              <Landing hasFavs={this.state.hasFavs} />
+              <Landing
+                hasFavs={this.state.hasFavs}
+                userId={this.state.userId}
+              />
             ) : (
               <Signup signup={this.signup} />
             )}
           </Route>
           <Route path="/landing">
             {queryResponse ? <Redirect to="/" /> : <Login login={this.login} />}
-            render ={" "}
+            render =
             {() => (
               <Landing
                 hasFavs={this.state.hasFavs}
                 userId={this.state.userId}
               />
             )}
-          </Route>
-          <Route exact path="/landing/ayypresent">
-            <Landing hasFavs={this.state.hasFavs} userId={this.state.userId} />
           </Route>
         </Switch>
       </div>

@@ -1,7 +1,7 @@
-import React, { Component, useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-import { Button } from 'reactstrap';
-import { Favorite } from './Favorite';
+import React, { Component, useState, useEffect } from "react";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { Button } from "reactstrap";
+import { Favorite } from "./Favorite";
 
 /* The Landing page is the page our users are presented with on login or signup. Here, we 
 meant to render our current favorites in cards that might provide additional details for the campsites 
@@ -12,21 +12,23 @@ const landing = props => {
   const { hasFavs } = props;
   const [favs, setFavs] = useState([]);
   const [gotData, setGotData] = useState(false); // prevent re-running of useEffect
-  let userId; //capture userId here from state for fetch below
+  //capture userId here from state for fetch below
 
   useEffect(() => {
     // upon load, the landing page will query back end for a specific users fav camps
     // if hasFavs was not defined during login from the App component, nothing will be queried
+    console.log("USER ID>>>>:", props.userId);
     if (hasFavs) {
       if (gotData === false) {
+        console.log("USER ID>>>>:", props.userId);
         // this boolean prevents the query from running more than once
-        fetch('/user/favorites/1') //update 1 to userId dynamically later
+        fetch(`/user/favorites/${props.userId}`) //update 1 to userId dynamically later
           .then(res => res.json())
           .then(data => {
             setGotData(true);
             setFavs(data.user);
           })
-          .catch(error => console.log('useEffect error:', error));
+          .catch(error => console.log("useEffect error:", error));
       }
     }
   }, []); // empty array keeps useEffect from running indefinitely, useEffect runs whenever favs is updated
@@ -34,10 +36,10 @@ const landing = props => {
   // use the setFavs hook function to update
   const removeFavorite = (user_id, camp_id) => {
     const data = { user_id, camp_id };
-    fetch('/user/favorites/', {
-      method: 'DELETE',
+    fetch("/user/favorites/", {
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
     })
@@ -51,12 +53,12 @@ const landing = props => {
   });
 
   return (
-    <div className='Landing' style={{ textAlign: 'center' }}>
+    <div className="Landing" style={{ textAlign: "center" }}>
       <h1>fireside</h1>
-      <Link to='/camp'>
-        <Button color='primary'>Find Camps</Button>
+      <Link to="/camp">
+        <Button color="primary">Find Camps</Button>
       </Link>
-      {gotData ? <h3 className='favsHeader'>Your Favorites</h3> : ''}
+      {gotData ? <h3 className="favsHeader">Your Favorites</h3> : ""}
       <div>{favoriteComponents}</div>
     </div>
   );
