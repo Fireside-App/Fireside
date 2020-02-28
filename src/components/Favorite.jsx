@@ -21,7 +21,8 @@ export const Favorite = props => {
           borderColor: '#333',
           textAlign: 'center',
           margin: '10px',
-          boxShadow: '1px 1px 1px rgba(0, 0, 0, 0.4)'
+          boxShadow: '1px 1px 1px rgba(0, 0, 0, 0.4)',
+          fontSize: '14px'
         }}
       >
         <CardTitle>{props.data.name}</CardTitle>

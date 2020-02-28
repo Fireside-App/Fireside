@@ -2,17 +2,17 @@ import React, { Component, useState } from "react";
 // import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 // import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 // import { faStar as regStar } from '@fortawesome/free-regular-svg-icons';
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-import {
-  Container,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-  Table
-} from "reactstrap";
+// import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+// import {
+//   Container,
+//   Button,
+//   Form,
+//   FormGroup,
+//   Label,
+//   Input,
+//   FormText,
+//   Table
+// } from 'reactstrap';
 import WeatherModal from "./WeatherModal.jsx";
 
 /*
@@ -29,19 +29,46 @@ const Camp = props => {
     sitesWithPetsAllowed,
     sitesWithSewerHookup,
     sitesWithWaterHookup,
-    sitesWithWaterFront,
+    sitesWithWaterfront,
     state
   } = camp;
+
   const [showModal, setShow] = useState(false);
 
-  let fav = <button type="radio" name={`fav${facilityName}`} />;
+  const addFav = () => {
+    const body = {
+      name: facilityName,
+      pets: sitesWithPetsAllowed,
+      sewer: sitesWithSewerHookup,
+      water: sitesWithWaterHookup,
+      waterfront: sitesWithWaterfront,
+      long: longitude,
+      lat: latitude,
+      user_id: props.userId
+    };
+
+    fetch("/user/favorites", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+      .then(() => console.log("added fave to DB"))
+      .catch(error => console.log(error));
+  };
+
+  let fav = (
+    <button type="radio" onClick={e => addFav()} name={`fav${facilityName}`}>
+      +
+    </button>
+  );
 
   function closeModal() {
     setShow(false);
   }
 
   return (
-    // <ReactFragment className="CampFrag">
     <tr className="CampRow">
       <td>
         <strong>{facilityName}</strong>
@@ -56,7 +83,7 @@ const Camp = props => {
         <strong>{sitesWithWaterHookup}</strong>
       </td>
       <td>
-        <strong>{sitesWithWaterFront}</strong>
+        <strong>{sitesWithWaterfront}</strong>
       </td>
       <td id="longitude">
         <strong>{longitude}</strong>
@@ -69,7 +96,7 @@ const Camp = props => {
       </td>
       <td>
         <button
-          className="getWeather"
+          // className='fav'
           onClick={e => {
             setShow(true);
           }}
@@ -87,7 +114,6 @@ const Camp = props => {
         />
       </div>
     </tr>
-    // </ReactFragment>
   );
 };
 
