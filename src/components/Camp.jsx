@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState } from "react";
 // import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 // import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 // import { faStar as regStar } from '@fortawesome/free-regular-svg-icons';
@@ -13,7 +13,7 @@ import React, { Component, useState } from 'react';
 //   FormText,
 //   Table
 // } from 'reactstrap';
-import WeatherModal from './WeatherModal.jsx';
+import WeatherModal from "./WeatherModal.jsx";
 
 /*
 As mentioned in Results.jsx, the major work in Camp.jsx that needs to be done includes creating a function
@@ -41,25 +41,25 @@ const Camp = props => {
       pets: sitesWithPetsAllowed,
       sewer: sitesWithSewerHookup,
       water: sitesWithWaterHookup,
-      waterfront: sitesWithWaterFront,
+      waterfront: sitesWithWaterfront,
       long: longitude,
       lat: latitude,
       user_id: props.userId
     };
 
-    fetch('/user/favorites', {
-      method: 'POST',
+    fetch("/user/favorites", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(body)
     })
-      .then(() => console.log('added fave to DB'))
+      .then(() => console.log("added fave to DB"))
       .catch(error => console.log(error));
   };
 
   let fav = (
-    <button type='radio' onClick={e => addFav()} name={`fav${facilityName}`}>
+    <button type="radio" onClick={e => addFav()} name={`fav${facilityName}`}>
       +
     </button>
   );
@@ -69,7 +69,7 @@ const Camp = props => {
   }
 
   return (
-    <tr className='CampRow'>
+    <tr className="CampRow">
       <td>
         <strong>{facilityName}</strong>
       </td>
@@ -85,13 +85,13 @@ const Camp = props => {
       <td>
         <strong>{sitesWithWaterfront}</strong>
       </td>
-      <td id='longitude'>
+      <td id="longitude">
         <strong>{longitude}</strong>
       </td>
-      <td id='latitude' value={latitude}>
+      <td id="latitude" value={latitude}>
         <strong>{latitude}</strong>
       </td>
-      <td className='fav'>
+      <td className="fav">
         <strong>{fav}</strong>
       </td>
       <td>

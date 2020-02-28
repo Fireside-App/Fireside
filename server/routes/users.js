@@ -7,7 +7,7 @@ router.post(
   userController.login,
   userController.setSSIDCookie,
   (req, res) => {
-    res.status(200).json(res.locals);
+    res.status(200).json(res.locals.user);
   }
 );
 
@@ -30,12 +30,12 @@ router.post(
 );
 
 // retrieves all of the logged in user's favorite camps upon successful login
-router.get('/favorites/:id', userController.getFav, (req, res, next) => {
+router.get("/favorites/:id", userController.getFav, (req, res, next) => {
   res.status(200).json(res.locals);
 });
 
 // NOT IN USE
-router.delete('/deleteuser', userController.deleteUser, (req, res) => {
+router.delete("/deleteuser", userController.deleteUser, (req, res) => {
   res.status(200).json();
 });
 

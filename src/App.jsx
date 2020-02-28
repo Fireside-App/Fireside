@@ -124,6 +124,8 @@ class App extends Component {
             const copy = Object.assign({}, state);
             copy.loggedIn = true;
             copy.userId = data.id;
+            console.log("copy.userId: ", copy.userId);
+
             return copy;
           });
         }
@@ -294,11 +296,13 @@ class App extends Component {
           </Route>
           <Route path="/landing">
             {queryResponse ? <Redirect to="/" /> : <Login login={this.login} />}
-            render = {() => <Landing hasFavs={this.state.hasFavs} />}
-          </Route>
-          <Route exact path="/landing/ayypresent">
-            <Landing hasFavs={this.state.hasFavs} userId={this.state.userId}/>
-
+            render =
+            {() => (
+              <Landing
+                hasFavs={this.state.hasFavs}
+                userId={this.state.userId}
+              />
+            )}
           </Route>
         </Switch>
       </div>

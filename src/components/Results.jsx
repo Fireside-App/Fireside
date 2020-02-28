@@ -54,9 +54,9 @@ const Results = props => {
       >
         <Table
           userId={props.userId}
-          className='Table'
+          className="Table"
           scrollY
-          maxHeight='400px'
+          maxHeight="400px"
         >
           <thead>
             <tr>
