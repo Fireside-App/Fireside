@@ -69,7 +69,7 @@ const Camp = props => {
       </td>
       <td>
         <button
-          className="fav"
+          className="getWeather"
           onClick={e => {
             setShow(true);
           }}

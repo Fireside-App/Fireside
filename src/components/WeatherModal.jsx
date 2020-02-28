@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
-import Day from "./Day/Day.jsx";
-import { Modal } from "react-bootstrap";
-import moment from "moment-timezone";
+import React, { useState, useEffect } from 'react';
+import Day from './Day/Day.jsx';
+import { Modal } from 'react-bootstrap';
+import moment from 'moment-timezone';
 
 const months_arr = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "Jule",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'Jule',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
 ];
 
 function toTimeZone(time) {
@@ -62,13 +62,16 @@ const WeatherModal = props => {
   const weatherDays = [];
   for (let i = 0; i < 7; i++) {
     weatherDays.push(
-      <Day day={days[i]} high={highs[i]} low={lows[i]} chance={rain[i]} />
+      <Day className="weather-boxes" day={days[i]} high={highs[i]} low={lows[i]} chance={rain[i]} />
     );
   }
   return (
     <Modal show={props.showModal} onRequestClose={props.close}>
       <button onClick={props.close}>Close</button>
+      <center>7 Day Weather Forecast</center>
+      <div className="weather-container">
       {weatherDays}
+      </div>
     </Modal>
   );
 };
