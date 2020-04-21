@@ -1,4 +1,4 @@
-# Lets-camp
+# Fireside
 
 Camping should be made easier with weather information, camp parking information, and an overall community board that may have already been to those campsites!
 
