@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Container,
   Button,
@@ -7,22 +7,42 @@ import {
   Label,
   Input,
   FormText
-} from 'reactstrap';
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
+} from "reactstrap";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+
+/*
+Our query page submits queries to the activeAPI via the route defined in server/routes/camp.js and 
+the middleware defined in server/controllers/campController.js. 
+
+Currently our api call is broken. We think it has an issue with how the API is responding since we seem 
+to be building our API call correctly. We think we might have to separately query for each amenity instead of 
+querying for all amenities at the same time in the way we build our apistring. 
+*/
 
 const Query = props => {
-  const { stateOnChange, query, petOnChange, waterHookOnChange, sewerHookOnChange, waterFrontOnChange } = props;
+  const {
+    stateOnChange,
+    query,
+    petOnChange,
+    waterHookOnChange,
+    sewerHookOnChange,
+    waterFrontOnChange
+  } = props;
   return (
-    <div className='Query'>
-      <Form className='Form' onSubmit={query}>
+    <div className="Query">
+      <Form className="Form" onSubmit={query}>
         <FormGroup className="states">
-          <Label className="header" for='stateSelect'><strong>Where are you headed?</strong></Label>
-          <Input type='select' name='select' id='stateSelect' size='1' className="statesDrop" onChange={stateOnChange}>
+          <Label className="header" for="stateSelect">
+            <strong>Where are you headed?</strong>
+          </Label>
+          <Input
+            type="select"
+            name="select"
+            id="stateSelect"
+            size="1"
+            className="statesDrop"
+            onChange={stateOnChange}
+          >
             <option>AL</option>
             <option>AK</option>
             <option>AZ</option>
@@ -75,54 +95,56 @@ const Query = props => {
             <option>WY</option>
           </Input>
         </FormGroup>
-        <FormGroup tag='fieldset'>
-          <legend className="header"><strong>What do you need?</strong></legend>
+        <FormGroup tag="fieldset">
+          <legend className="header">
+            <strong>What do you need?</strong>
+          </legend>
           <FormGroup check>
             <Label check>
               <Input
-                type='radio'
-                name='radio1'
-                id='pet'
+                type="radio"
+                name="radio1"
+                id="pet"
                 onChange={petOnChange}
-              />{' '}
+              />{" "}
               Pet friendly?
             </Label>
           </FormGroup>
           <FormGroup check>
             <Label check>
               <Input
-                type='radio'
-                name='radio2'
-                id='sewerHook'
+                type="radio"
+                name="radio2"
+                id="sewerHook"
                 onChange={sewerHookOnChange}
-              />{' '}
+              />{" "}
               Need a sewer hook-up?
             </Label>
           </FormGroup>
           <FormGroup check>
             <Label check>
               <Input
-                type='radio'
-                name='radio3'
-                id='waterHook'
+                type="radio"
+                name="radio3"
+                id="waterHook"
                 onChange={waterHookOnChange}
-              />{' '}
+              />{" "}
               Need a water hook-up?
             </Label>
           </FormGroup>
           <FormGroup check>
             <Label check>
               <Input
-                type='radio'
-                name='radio4'
-                id='waterFront'
+                type="radio"
+                name="radio4"
+                id="waterFront"
                 onChange={waterFrontOnChange}
-              />{' '}
+              />{" "}
               Waterfront?
             </Label>
           </FormGroup>
         </FormGroup>
-          <Button className="QueryButton">Let's Go!</Button>
+        <Button className="QueryButton">Let's Go!</Button>
         {/* <Link to="/results"> */}
         {/* </Link> */}
       </Form>

@@ -1,0 +1,9 @@
+.card.text-white.card-body {
+  background: red;
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.card-text {
+  margin-bottom: 25%;
+}

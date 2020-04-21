@@ -1,6 +1,13 @@
 const { Pool } = require('pg');
+const PG_URI = require('./PG_URI.js');
 
-const PG_URI = 'postgres://mowfpguv:mVDfILFuxpfO_uZrMEcOj38C324BYU39@raja.db.elephantsql.com:5432/mowfpguv'
+/*
+this is a link to eli's elephantSQL. it would be better practice to store the db key in the .env
+file and access it via process.env.whateryouwanttonameyourkey and build a string like so: 
+
+const PG_URI = 'postgres://' += process.env.whateveryouwanttonameyourkey += '@raja.db.elephantsql.com:5432/mowfpguv'
+
+*/
 
 const pool = new Pool({
   connectionString: PG_URI
