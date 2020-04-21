@@ -23,7 +23,7 @@ function toTimeZone(time) {
   var year = date.getFullYear();
   var month = months_arr[date.getMonth()];
   var day = date.getDate();
-  return `${day} ${month} ${year}`;
+  return `${month} ${day} ${year}`;
 }
 
 const WeatherModal = props => {
@@ -62,13 +62,16 @@ const WeatherModal = props => {
   const weatherDays = [];
   for (let i = 0; i < 7; i++) {
     weatherDays.push(
-      <Day day={days[i]} high={highs[i]} low={lows[i]} chance={rain[i]} />
+      <Day className="weather-boxes" day={days[i]} high={highs[i]} low={lows[i]} chance={rain[i]} />
     );
   }
   return (
     <Modal show={props.showModal} onRequestClose={props.close}>
       <button onClick={props.close}>Close</button>
+      <center>7 Day Weather Forecast</center>
+      <div className="weather-container">
       {weatherDays}
+      </div>
     </Modal>
   );
 };

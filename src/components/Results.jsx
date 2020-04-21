@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import Camp from './Camp.jsx';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import {
@@ -28,37 +28,30 @@ INSERT INTO the favorites table on the database with both the userID and the lis
 const Results = props => {
   const { queriedGrounds, getWeather } = props;
 
+  // deconstruct hook to hold latitude/longitude locally
+
+  const [longitudes, setLongitude] = useState([]);
+  const [latitudes, setLatitude] = useState([]);
+
+  console.log(queriedGrounds, 'this is query GROUNDS information');
+  const longAndLat = queriedGrounds.map((current, index) => {});
+
   let homeButton;
   let tableResults;
 
   const results = queriedGrounds.map(curr => {
-    return <Camp camp={curr} getWeather={getWeather} />;
+    return <Camp userId={props.userId} camp={curr} getWeather={getWeather} />;
   });
-
-  // if(results.length > 0){
-  //   tableResults = <Table className="Table" hover>
-  //                     <thead>
-  //                       <tr>
-  //                         <th>Camp</th>
-  //                         <th>Pets</th>
-  //                         <th>Sewer-hookup</th>
-  //                         <th>Water-hookup</th>
-  //                         <th>waterfront</th>
-  //                         <th>Longitude</th>
-  //                         <th>Latitude</th>
-  //                       </tr>
-  //                     </thead>
-  //                     {/* <tbody>
-  //                      {results}
-  //                     </tbody> */}
-  //                   </ Table>;
-  //   homeButton = <Button className="findMore" color="secondary" >Find More </Button>;
-  // }
   return (
     <div className='Results'>
       <h1>Your Next Adventure Awaits</h1>
-      <Link to='/landing/ayypresent'>
-        <Button className='returnHome' outline color='info'>
+      <Link to='/'>
+        <Button
+          className='returnHome'
+          onClick={props.resetQueried}
+          outline
+          color='info'
+        >
           Return Home{' '}
         </Button>
       </Link>
@@ -68,7 +61,12 @@ const Results = props => {
           overflowY: 'auto'
         }}
       >
-        <Table className='Table' scrollY maxHeight='400px'>
+        <Table
+          userId={props.userId}
+          className='Table'
+          scrollY
+          maxHeight='400px'
+        >
           <thead>
             <tr>
               <th>Camp</th>
@@ -76,8 +74,9 @@ const Results = props => {
               <th>Sewer-hookup</th>
               <th>Water-hookup</th>
               <th>waterfront</th>
-              <th>Longitude</th>
-              <th>Latitude</th>
+              {/* <th>Longitude</th> */}
+              {/* <th>Latitude</th> */}
+              <th>Map It</th>
               <th>Favorite</th>
               <th>Weather</th>
             </tr>

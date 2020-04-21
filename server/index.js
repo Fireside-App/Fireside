@@ -1,13 +1,15 @@
 const { Pool } = require('pg');
 const PG_URI = require('./PG_URI.js');
 
-/*
-this is a link to eli's elephantSQL. it would be better practice to store the db key in the .env
-file and access it via process.env.whateryouwanttonameyourkey and build a string like so: 
+// console.log(PG_URI);
 
-const PG_URI = 'postgres://' += process.env.whateveryouwanttonameyourkey += '@raja.db.elephantsql.com:5432/mowfpguv'
 
-*/
+// this is a link to eli's elephantSQL. it would be better practice to store the db key in the .env
+// file and access it via process.env.whateryouwanttonameyourkey and build a string like so: 
+
+// const PG_URI = 'postgres://ptbogdgk:SZhh_HoupOeFX_pbTMX9qk4kNEZVZkFB@rajje.db.elephantsql.com:5432/ptbogdgk';
+
+
 
 const pool = new Pool({
   connectionString: PG_URI
@@ -20,7 +22,6 @@ const pool = new Pool({
 // This will be required in the controllers to be the access point to the database
 module.exports = {
   query: (text, params, callback) => {
-    console.log('executed query', text);
     return pool.query(text, params, callback);
   }
 };

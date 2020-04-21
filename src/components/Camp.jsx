@@ -1,19 +1,21 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState } from 'react';
 // import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 // import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 // import { faStar as regStar } from '@fortawesome/free-regular-svg-icons';
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-import {
-  Container,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-  Table
-} from "reactstrap";
-import WeatherModal from "./WeatherModal.jsx";
+import WeatherModal from './WeatherModal.jsx';
+// import MAP modal component
+import MapModal from './MapModal.jsx';
+// import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+// import {
+//   Container,
+//   Button,
+//   Form,
+//   FormGroup,
+//   Label,
+//   Input,
+//   FormText,
+//   Table
+// } from 'reactstrap';
 
 /*
 As mentioned in Results.jsx, the major work in Camp.jsx that needs to be done includes creating a function
@@ -29,20 +31,53 @@ const Camp = props => {
     sitesWithPetsAllowed,
     sitesWithSewerHookup,
     sitesWithWaterHookup,
-    sitesWithWaterFront,
+    sitesWithWaterfront,
     state
   } = camp;
+
   const [showModal, setShow] = useState(false);
 
-  let fav = <button type="radio" name={`fav${facilityName}`} />;
+  const [showMapModal, setShowMapModal] = useState(false);
+
+  const addFav = () => {
+    const body = {
+      name: facilityName,
+      pets: sitesWithPetsAllowed,
+      sewer: sitesWithSewerHookup,
+      water: sitesWithWaterHookup,
+      waterfront: sitesWithWaterfront,
+      long: longitude,
+      lat: latitude,
+      user_id: props.userId
+    };
+
+    fetch('/user/favorites', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+      .then(() => console.log('added fave to DB'))
+      .catch(error => console.log(error));
+  };
+
+  let fav = (
+    <button type='radio' onClick={e => addFav()} name={`fav${facilityName}`}>
+      +
+    </button>
+  );
 
   function closeModal() {
     setShow(false);
   }
 
+  function closeMapModal() {
+    setShowMapModal(false);
+  }
+  // create a button component that will display the Map form
   return (
-    // <ReactFragment className="CampFrag">
-    <tr className="CampRow">
+    <tr className='CampRow'>
       <td>
         <strong>{facilityName}</strong>
       </td>
@@ -56,20 +91,55 @@ const Camp = props => {
         <strong>{sitesWithWaterHookup}</strong>
       </td>
       <td>
-        <strong>{sitesWithWaterFront}</strong>
+        <strong>{sitesWithWaterfront}</strong>
       </td>
-      <td id="longitude">
+      {/* Deleting this from CAMP component; ADDING BTN that appears MODAL with MAP API */}
+      {/* <td id="longitude">
         <strong>{longitude}</strong>
       </td>
       <td id="latitude" value={latitude}>
         <strong>{latitude}</strong>
-      </td>
-      <td className="fav">
-        <strong>{fav}</strong>
-      </td>
+      </td> */}
       <td>
         <button
-          className="fav"
+          className='mapModal'
+          onClick={e => {
+            setShowMapModal(true);
+          }}
+        >
+          Get Map
+        </button>
+      </td>
+      <div>
+        <MapModal
+          show={showMapModal}
+          close={closeMapModal}
+          latitude={latitude}
+          longitude={longitude}
+        />
+      </div>
+      {/* <div>
+        <MapModal show={showModal} />
+      </div> */}
+      {/* <div>
+        <MapModal />
+      </div> */}
+      {/* <div>
+        <button>Get Map</button>
+        <MapModal
+          close={closeModal}
+          showModal={showModal}
+          // latitude={latitude}
+          // longitude={longitude}
+        />
+      </div> */}
+      <td className='fav'>
+        <strong>{fav}</strong>
+      </td>
+
+      <td>
+        <button
+          // className='fav'
           onClick={e => {
             setShow(true);
           }}
@@ -79,15 +149,14 @@ const Camp = props => {
       </td>
       <div>
         <WeatherModal
-          close={closeModal}
           showModal={showModal}
+          close={closeModal}
           latitude={latitude}
           longitude={longitude}
           getWeather={props.getWeather}
         />
       </div>
     </tr>
-    // </ReactFragment>
   );
 };
 

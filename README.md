@@ -17,5 +17,10 @@ Features we wanted to implement on top of what we already have include:
 
 We probably missed a ton of stuff in comments. Don't hesitate to reach out to us if something isn't clear. 
 
+To start:
+1. Clone
+2. npm run start
+3. Enjoy!
+
 Team Squirtle.
 Good luck!
