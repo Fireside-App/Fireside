@@ -9,5 +9,4 @@ To start:
 2. npm run start
 3. Enjoy!
 
-Team Squirtle.
-Good luck!
+Please contact the origin team for pull requests! We'd love to accept any incoming contributions. 
