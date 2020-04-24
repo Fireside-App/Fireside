@@ -1,7 +1,6 @@
 const path = require("path");
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
 
 require("dotenv").config();
 
@@ -21,7 +20,6 @@ const campRouter = require("./routes/camp.js");
  */
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(bodyParser.json());
 app.use(cookieParser());
 
 /**
