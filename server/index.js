@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
-const PG_URI = require('./PG_URI.js');
-
+const PG_URI = require('./PG_URI.js'); 
+// if you'd like to test this app on your own, you'll need to provide a PG_URI from a SQL database provider like ElephantSQL
 
 const pool = new Pool({
   connectionString: PG_URI
